@@ -1,13 +1,17 @@
 package com.walnut.cloud.open.common.util.http;
 
+import com.walnut.cloud.open.common.enums.bytedance.ByteType;
+import com.walnut.cloud.open.common.enums.wechat.WxType;
+import com.walnut.cloud.open.common.error.bytedance.ByteError;
+import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
+import com.walnut.cloud.open.common.error.wechat.WxError;
+import com.walnut.cloud.open.common.error.wechat.WxErrorException;
 import com.walnut.cloud.open.common.util.http.apache.ApacheSimpleGetRequestExecutor;
 import com.walnut.cloud.open.common.util.http.jodd.JoddHttpSimpleGetRequestExecutor;
 import com.walnut.cloud.open.common.util.http.okhttp.OkHttpSimpleGetRequestExecutor;
-import com.walnut.cloud.open.common.enums.wechat.WxType;
-import com.walnut.cloud.open.common.error.wechat.WxError;
-import com.walnut.cloud.open.common.error.wechat.WxErrorException;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 简单的GET请求执行器.
@@ -24,6 +28,11 @@ public abstract class SimpleGetRequestExecutor<H, P> implements RequestExecutor<
   @Override
   public void execute(String uri, String data, ResponseHandler<String> handler, WxType wxType) throws WxErrorException, IOException {
     handler.handle(this.execute(uri, data, wxType));
+  }
+
+  @Override
+  public void execute(String uri, Map<String, String> headers, String data, ResponseHandler<String> handler, ByteType wxType) throws ByteErrorException, IOException {
+    handler.handle(this.execute(uri, headers, data, wxType));
   }
 
   public static RequestExecutor<String, String> create(RequestHttp<?, ?> requestHttp) {
@@ -43,6 +52,15 @@ public abstract class SimpleGetRequestExecutor<H, P> implements RequestExecutor<
     WxError error = WxError.fromJson(responseContent, wxType);
     if (error.getErrorCode() != 0) {
       throw new WxErrorException(error);
+    }
+
+    return responseContent;
+  }
+
+  protected String handleResponse(ByteType byteType, String responseContent) throws ByteErrorException {
+    ByteError error = ByteError.fromJson(responseContent, byteType);
+    if (error.getErrorCode() != 0) {
+      throw new ByteErrorException(error);
     }
 
     return responseContent;

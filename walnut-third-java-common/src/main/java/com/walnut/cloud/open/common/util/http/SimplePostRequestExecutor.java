@@ -1,14 +1,18 @@
 package com.walnut.cloud.open.common.util.http;
 
+import com.walnut.cloud.open.common.enums.bytedance.ByteType;
+import com.walnut.cloud.open.common.enums.wechat.WxType;
+import com.walnut.cloud.open.common.error.bytedance.ByteError;
+import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
+import com.walnut.cloud.open.common.error.wechat.WxError;
+import com.walnut.cloud.open.common.error.wechat.WxErrorException;
 import com.walnut.cloud.open.common.util.http.apache.ApacheSimplePostRequestExecutor;
 import com.walnut.cloud.open.common.util.http.jodd.JoddHttpSimplePostRequestExecutor;
 import com.walnut.cloud.open.common.util.http.okhttp.OkHttpSimplePostRequestExecutor;
-import com.walnut.cloud.open.common.enums.wechat.WxType;
-import com.walnut.cloud.open.common.error.wechat.WxError;
-import com.walnut.cloud.open.common.error.wechat.WxErrorException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 简单的POST请求执行器，请求的参数是String, 返回的结果也是String
@@ -25,6 +29,12 @@ public abstract class SimplePostRequestExecutor<H, P> implements RequestExecutor
   public void execute(String uri, String data, ResponseHandler<String> handler, WxType wxType)
     throws WxErrorException, IOException {
     handler.handle(this.execute(uri, data, wxType));
+  }
+
+  @Override
+  public void execute(String uri, Map<String, String> headers, String data, ResponseHandler<String> handler, ByteType byteType)
+          throws ByteErrorException, IOException {
+    handler.handle(this.execute(uri, headers, data, byteType));
   }
 
   public static RequestExecutor<String, String> create(RequestHttp requestHttp) {
@@ -54,6 +64,19 @@ public abstract class SimplePostRequestExecutor<H, P> implements RequestExecutor
     WxError error = WxError.fromJson(responseContent, wxType);
     if (error.getErrorCode() != 0) {
       throw new WxErrorException(error);
+    }
+    return responseContent;
+  }
+
+  @NotNull
+  public String handleResponse(ByteType byteType, String responseContent) throws ByteErrorException {
+    if (responseContent.isEmpty()) {
+      throw new ByteErrorException("无响应内容");
+    }
+    ByteError error = ByteError.fromJson(responseContent, byteType);
+
+    if (error.getErrorCode() != 0) {
+      throw new ByteErrorException(error);
     }
     return responseContent;
   }
