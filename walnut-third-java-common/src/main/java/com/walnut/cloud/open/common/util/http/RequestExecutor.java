@@ -1,9 +1,12 @@
 package com.walnut.cloud.open.common.util.http;
 
+import com.walnut.cloud.open.common.enums.bytedance.ByteType;
 import com.walnut.cloud.open.common.enums.wechat.WxType;
+import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
 import com.walnut.cloud.open.common.error.wechat.WxErrorException;
 
 import java.io.IOException;
+import java.util.Map;
 
 
 public interface RequestExecutor<T, E> {
@@ -31,6 +34,13 @@ public interface RequestExecutor<T, E> {
    * @throws IOException      io异常
    */
   void execute(String uri, E data, ResponseHandler<T> handler, WxType wxType) throws WxErrorException, IOException;
+
+
+  T execute(String uri, Map<String, String> headers, E data, ByteType byteType) throws ByteErrorException, IOException;
+
+
+  void execute(String uri, Map<String, String> headers, E data, ResponseHandler<T> handler, ByteType byteType) throws ByteErrorException, IOException;
+
 
 
 }

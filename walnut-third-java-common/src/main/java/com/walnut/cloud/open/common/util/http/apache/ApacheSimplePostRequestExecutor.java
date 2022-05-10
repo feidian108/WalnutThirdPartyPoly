@@ -1,7 +1,9 @@
 package com.walnut.cloud.open.common.util.http.apache;
 
 
+import com.walnut.cloud.open.common.enums.bytedance.ByteType;
 import com.walnut.cloud.open.common.enums.wechat.WxType;
+import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
 import com.walnut.cloud.open.common.error.wechat.WxErrorException;
 import com.walnut.cloud.open.common.util.http.RequestHttp;
 import com.walnut.cloud.open.common.util.http.SimplePostRequestExecutor;
@@ -14,6 +16,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class ApacheSimplePostRequestExecutor extends SimplePostRequestExecutor<CloseableHttpClient, HttpHost> {
   public ApacheSimplePostRequestExecutor(RequestHttp requestHttp) {
@@ -42,4 +45,29 @@ public class ApacheSimplePostRequestExecutor extends SimplePostRequestExecutor<C
     }
   }
 
+  @Override
+  public String execute(String uri, Map<String, String> headers, String postEntity, ByteType byteType) throws ByteErrorException, IOException {
+    HttpPost httpPost = new HttpPost(uri);
+    if (requestHttp.getRequestHttpProxy() != null) {
+      RequestConfig config = RequestConfig.custom().setProxy(requestHttp.getRequestHttpProxy()).build();
+      httpPost.setConfig(config);
+    }
+
+    if( headers != null ) {
+      headers.keySet().forEach(key-> httpPost.addHeader(key, headers.get(key)));
+    }
+
+    if (postEntity != null) {
+      StringEntity entity = new StringEntity(postEntity, Consts.UTF_8);
+      entity.setContentType("application/json; charset=utf-8");
+      httpPost.setEntity(entity);
+    }
+
+    try (CloseableHttpResponse response = requestHttp.getRequestHttpClient().execute(httpPost)) {
+      String responseContent = Utf8ResponseHandler.INSTANCE.handleResponse(response);
+      return this.handleResponse(byteType, responseContent);
+    } finally {
+      httpPost.releaseConnection();
+    }
+  }
 }

@@ -1,6 +1,8 @@
 package com.walnut.cloud.open.common.util.http.jodd;
 
+import com.walnut.cloud.open.common.enums.bytedance.ByteType;
 import com.walnut.cloud.open.common.enums.wechat.WxType;
+import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
 import com.walnut.cloud.open.common.error.wechat.WxErrorException;
 import com.walnut.cloud.open.common.util.http.RequestHttp;
 import com.walnut.cloud.open.common.util.http.SimplePostRequestExecutor;
@@ -11,6 +13,7 @@ import jodd.http.ProxyInfo;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 
 public class JoddHttpSimplePostRequestExecutor extends SimplePostRequestExecutor<HttpConnectionProvider, ProxyInfo> {
@@ -36,5 +39,25 @@ public class JoddHttpSimplePostRequestExecutor extends SimplePostRequestExecutor
 
     return this.handleResponse(wxType, response.bodyText());
   }
+
+  @Override
+  public String execute(String uri, Map<String, String> headers, String postEntity, ByteType byteType) throws ByteErrorException, IOException {
+    HttpConnectionProvider provider = requestHttp.getRequestHttpClient();
+    ProxyInfo proxyInfo = requestHttp.getRequestHttpProxy();
+
+    HttpRequest request = HttpRequest.post(uri);
+    if (proxyInfo != null) {
+      provider.useProxy(proxyInfo);
+    }
+    request.withConnectionProvider(provider);
+    if (postEntity != null) {
+      request.bodyText(postEntity);
+    }
+    HttpResponse response = request.send();
+    response.charset(StandardCharsets.UTF_8.name());
+
+    return this.handleResponse(byteType, response.bodyText());
+  }
+
 
 }
