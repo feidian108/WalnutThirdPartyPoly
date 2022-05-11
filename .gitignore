@@ -1,5 +1,6 @@
 HELP.md
 target/
+walnut-demo/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
