@@ -1,6 +1,6 @@
 ## WalnutCloudJava - 第三方开放平台聚合开发工具包 Java SDK
 
-[![码云Gitee](https://gitee.com/feidian110/third-party-poly/badge/star.svg?theme=blue)](https://gitee.com/feidian110/third-party-poly)
+[![码云Gitee](https://gitee.com/walnutcloud/third-party-poly/badge/star.svg?theme=blue)](https://gitee.com/walnutcloud/third-party-poly)
 [![Github](https://img.shields.io/github/stars/feidian108/WalnutThirdPartyPoly?logo=github&style=flat)](https://github.com/feidian108/WalnutThirdPartyPoly)
 [![GitHub release](https://img.shields.io/github/v/release/feidian108/WalnutThirdPartyPoly.svg)](https://github.com/feidian108/WalnutThirdPartyPoly/releases)
 [![使用IntelliJ IDEA开发维护](https://img.shields.io/badge/IntelliJ%20IDEA-提供支持-blue.svg)](https://www.jetbrains.com/?from=WxJava-weixin-java-tools)
@@ -38,9 +38,9 @@
 </div>
 
 ### 版本说明
-github 项目地址：https://github.com/feidian108/Bytedance-Java.git
+github 项目地址：https://github.com/feidian108/WalnutThirdPartyPoly.git
 
-gitee  项目地址：https://gitee.com/wx_225d657fae/Bytedance-Java.git
+gitee  项目地址：https://gitee.com/walnutcloud/third-party-poly.git
 ### 其他
 ### 贡献者列表
 

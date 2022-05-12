@@ -49,4 +49,15 @@ public interface ByteOpenApiUrl {
         private final String prefix;
         private final String path;
     }
+
+    @AllArgsConstructor
+    @Getter
+    enum User implements ByteOpenApiUrl {
+
+        DOU_GET_FANS_LIST_URL(API_DEFAULT_HOST_URL, "/fans/list/?open_id=%s&cursor=%s&count=%s"),
+        ;
+
+        private final String prefix;
+        private final String path;
+    }
 }
