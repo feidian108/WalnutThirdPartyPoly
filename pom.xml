@@ -7,15 +7,15 @@
     <groupId>com.walnut-cloud.open</groupId>
     <artifactId>WalnutThirdPartyPoly</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.7</version>
+    <version>1.1.0</version>
 
     <name>第三方开放平台聚合发开工具包</name>
     <description>第三方的平台、开放平台聚合开发工具包</description>
     <url>https://github.com/feidian108/WalnutThirdPartyPoly</url>
 
     <modules>
-        <module>walnut-third-java-common</module>
-        <module>walnut-third-java-bytedance</module>
+        <module>walnut-java-common</module>
+        <module>walnut-java-bytedance</module>
     </modules>
 
     <properties>
