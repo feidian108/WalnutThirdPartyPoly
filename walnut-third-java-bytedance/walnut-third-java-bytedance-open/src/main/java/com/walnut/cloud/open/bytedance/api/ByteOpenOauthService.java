@@ -3,6 +3,7 @@ package com.walnut.cloud.open.bytedance.api;
 
 import com.walnut.cloud.open.bytedance.bean.result.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.open.bytedance.bean.result.auth.ByteOpenQueryAuthResult;
+import com.walnut.cloud.open.bytedance.bean.result.user.ByteOpenFans;
 import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -75,7 +76,7 @@ public interface ByteOpenOauthService {
      * @return 粉丝列表信息
      * @throws ByteErrorException 异常
      */
-    String getFansList(String openId, int cursor, int count) throws ByteErrorException;
+    ByteOpenFans getFansList(String openId, int cursor, int count) throws ByteErrorException;
 
     /**
      * <h3> 用户管理 - 获取关注列表 </h3>
