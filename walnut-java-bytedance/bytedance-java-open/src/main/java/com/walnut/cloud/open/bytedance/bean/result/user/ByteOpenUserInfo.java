@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class ByteOpenFansInfo implements Serializable {
+public class ByteOpenUserInfo implements Serializable {
 
     private static final long serialVersionUID = -8713680081354754208L;
 

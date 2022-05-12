@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class ByteOpenFans implements Serializable {
+public class ByteOpenFollow implements Serializable {
 
     private static final long serialVersionUID = 2394736235020206855L;
 
@@ -17,5 +17,4 @@ public class ByteOpenFans implements Serializable {
     private int total;
 
     private List<ByteOpenUserInfo> list;
-
 }

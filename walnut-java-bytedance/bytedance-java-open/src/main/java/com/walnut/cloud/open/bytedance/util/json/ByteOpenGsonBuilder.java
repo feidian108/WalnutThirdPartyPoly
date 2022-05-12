@@ -9,6 +9,7 @@ import com.walnut.cloud.open.bytedance.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.open.bytedance.bean.result.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.open.bytedance.bean.result.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.open.bytedance.bean.result.user.ByteOpenFans;
+import com.walnut.cloud.open.bytedance.bean.result.user.ByteOpenFollow;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -27,6 +28,7 @@ public class ByteOpenGsonBuilder {
         INSTANCE.registerTypeAdapter(ByteOpenAuthorizationInfo.class, new ByteOpenAuthorizationInfoGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenAuthorizerInfo.class, new ByteOpenAuthorizerInfoGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenFans.class, new ByteOpenFansAdapter());
+        INSTANCE.registerTypeAdapter(ByteOpenFollow.class, new ByteOpenFollowGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenClientToken.class, new ByteOpenClientTokenGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenCallback.class, new ByteOpenCallbackGsonAdapter());
 

@@ -1,7 +1,7 @@
 package com.walnut.cloud.open.bytedance.util.json;
 
 import com.google.gson.*;
-import com.walnut.cloud.open.bytedance.bean.result.user.ByteOpenFans;
+import com.walnut.cloud.open.bytedance.bean.result.user.ByteOpenFollow;
 import com.walnut.cloud.open.bytedance.bean.result.user.ByteOpenUserInfo;
 import com.walnut.cloud.open.common.util.json.GsonHelper;
 
@@ -9,15 +9,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ByteOpenFansAdapter implements JsonDeserializer<ByteOpenFans> {
+public class ByteOpenFollowGsonAdapter implements JsonDeserializer<ByteOpenFollow> {
+
 
     @Override
-    public ByteOpenFans deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        ByteOpenFans fans = new ByteOpenFans();
+    public ByteOpenFollow deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        ByteOpenFollow follow = new ByteOpenFollow();
         JsonObject jsonObject = jsonElement.getAsJsonObject().getAsJsonObject("data");
-        fans.setCursor(GsonHelper.getInteger(jsonObject, "cursor"));
-        fans.setHasMore(GsonHelper.getBoolean(jsonObject, "has_more"));
-        fans.setTotal(GsonHelper.getInteger(jsonObject, "total"));
+        follow.setCursor(GsonHelper.getInteger(jsonObject, "cursor"));
+        follow.setHasMore(GsonHelper.getBoolean(jsonObject, "has_more"));
+        follow.setTotal(GsonHelper.getInteger(jsonObject, "total"));
 
         List<ByteOpenUserInfo> list = new ArrayList<>();
         for (JsonElement element : jsonObject.getAsJsonArray("list")) {
@@ -35,7 +36,7 @@ public class ByteOpenFansAdapter implements JsonDeserializer<ByteOpenFans> {
             list.add(userInfo);
         }
 
-        fans.setList(list);
-        return fans;
+        follow.setList(list);
+        return follow;
     }
 }
