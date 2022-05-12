@@ -61,4 +61,14 @@ public interface ByteOpenApiUrl {
         private final String prefix;
         private final String path;
     }
+
+    @AllArgsConstructor
+    @Getter
+    enum DataExternal implements ByteOpenApiUrl {
+
+        DOU_USER_ITEM_DATA_URL(API_DEFAULT_HOST_URL, "/data/external/user/item/?open_id=%s&date_type=%s")
+        ;
+        private final String prefix;
+        private final String path;
+    }
 }
