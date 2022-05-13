@@ -1,4 +1,4 @@
-package com.walnut.cloud.bytedance.open.bean.result.item;
+package com.walnut.cloud.bytedance.open.bean.item;
 
 
 import lombok.Data;

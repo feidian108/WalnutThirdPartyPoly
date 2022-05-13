@@ -1,8 +1,8 @@
 package com.walnut.cloud.bytedance.open.util.json;
 
 import com.google.gson.*;
-import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFans;
-import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenUserInfo;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenUserInfo;
 import com.walnut.cloud.open.common.util.json.GsonHelper;
 
 import java.lang.reflect.Type;

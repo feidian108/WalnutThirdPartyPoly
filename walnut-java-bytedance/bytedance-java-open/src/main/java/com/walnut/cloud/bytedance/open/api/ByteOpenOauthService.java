@@ -1,12 +1,13 @@
 package com.walnut.cloud.bytedance.open.api;
 
 
-import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenAuthorizerInfo;
-import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenQueryAuthResult;
-import com.walnut.cloud.bytedance.open.bean.result.data.star.ByteOpenStarHotListResult;
-import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemResult;
-import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFans;
-import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFollow;
+import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
+import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScoreV2;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -224,7 +225,7 @@ public interface ByteOpenOauthService {
      * @param uniqueId 达人抖音号
      * @return 达人指数数据
      */
-    String getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException;
+    ByteOpenStarAuthorScoreV2 getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 抖音影视综艺榜单数据 - 获取 本周 抖音电影榜、抖音电视剧榜、抖音综艺榜 </h3>

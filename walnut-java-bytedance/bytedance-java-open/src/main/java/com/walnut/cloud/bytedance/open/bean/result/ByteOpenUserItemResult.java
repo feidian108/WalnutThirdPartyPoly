@@ -1,5 +1,6 @@
-package com.walnut.cloud.bytedance.open.bean.result.item;
+package com.walnut.cloud.bytedance.open.bean.result;
 
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserItemData;
 import lombok.Data;
 
 import java.io.Serializable;

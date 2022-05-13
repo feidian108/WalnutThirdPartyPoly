@@ -1,7 +1,7 @@
-package com.walnut.cloud.bytedance.open.bean.result.auth;
+package com.walnut.cloud.bytedance.open.bean.result;
 
 
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenAuthorizationInfo;
+import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import lombok.Data;
 
 import java.io.Serializable;
