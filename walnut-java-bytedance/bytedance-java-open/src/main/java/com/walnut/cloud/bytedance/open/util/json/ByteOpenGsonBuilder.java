@@ -8,9 +8,10 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenHotVideoBillboardResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
-import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScore;
+import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class ByteOpenGsonBuilder {
         INSTANCE.registerTypeAdapter(ByteOpenUserItemResult.class, new ByteOpenUserItemResultGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenStarHotListResult.class, new ByteOpenStarHotListGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenStarAuthorScore.class, new ByteOpenStarAuthorScoreGsonAdapter());
+        INSTANCE.registerTypeAdapter(ByteOpenHotVideoBillboardResult.class, new ByteOpenHotVideoBillboardGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenCallback.class, new ByteOpenCallbackGsonAdapter());
 
     }

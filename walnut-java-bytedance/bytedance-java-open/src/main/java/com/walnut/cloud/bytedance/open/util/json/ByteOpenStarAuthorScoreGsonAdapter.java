@@ -2,7 +2,7 @@ package com.walnut.cloud.bytedance.open.util.json;
 
 
 import com.google.gson.*;
-import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScore;
+import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.open.common.util.json.GsonHelper;
 
 import java.lang.reflect.Type;

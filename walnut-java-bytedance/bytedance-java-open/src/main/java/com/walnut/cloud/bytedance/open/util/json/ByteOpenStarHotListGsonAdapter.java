@@ -1,7 +1,7 @@
 package com.walnut.cloud.bytedance.open.util.json;
 
 import com.google.gson.*;
-import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarHotList;
+import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarHotList;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
 import com.walnut.cloud.open.common.util.json.GsonHelper;
 import lombok.extern.slf4j.Slf4j;
