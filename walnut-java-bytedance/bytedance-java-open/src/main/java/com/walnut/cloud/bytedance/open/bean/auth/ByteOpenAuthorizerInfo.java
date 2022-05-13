@@ -1,4 +1,4 @@
-package com.walnut.cloud.bytedance.open.bean.result.auth;
+package com.walnut.cloud.bytedance.open.bean.auth;
 
 import lombok.Data;
 

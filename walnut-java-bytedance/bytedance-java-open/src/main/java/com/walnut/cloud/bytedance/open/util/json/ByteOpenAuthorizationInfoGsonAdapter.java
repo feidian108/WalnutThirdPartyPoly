@@ -2,7 +2,7 @@ package com.walnut.cloud.bytedance.open.util.json;
 
 
 import com.google.gson.*;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenAuthorizationInfo;
+import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.open.common.util.json.GsonHelper;
 
 import java.lang.reflect.Type;

@@ -1,5 +1,6 @@
-package com.walnut.cloud.bytedance.open.bean.result.data.star;
+package com.walnut.cloud.bytedance.open.bean.result;
 
+import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarHotList;
 import lombok.Data;
 
 import java.io.Serializable;

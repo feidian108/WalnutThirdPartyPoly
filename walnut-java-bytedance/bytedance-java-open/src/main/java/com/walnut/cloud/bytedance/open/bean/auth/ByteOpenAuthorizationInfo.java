@@ -1,4 +1,4 @@
-package com.walnut.cloud.bytedance.open.bean.result;
+package com.walnut.cloud.bytedance.open.bean.auth;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

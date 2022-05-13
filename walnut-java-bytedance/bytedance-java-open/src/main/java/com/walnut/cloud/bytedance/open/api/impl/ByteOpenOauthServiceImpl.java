@@ -7,13 +7,14 @@ import com.walnut.cloud.bytedance.open.api.ByteOpenService;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenAccessToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenAuthorizationInfo;
-import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenAuthorizerInfo;
-import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenQueryAuthResult;
-import com.walnut.cloud.bytedance.open.bean.result.data.star.ByteOpenStarHotListResult;
-import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemResult;
-import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFans;
-import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFollow;
+import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
+import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
+import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScoreV2;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl;
 import com.walnut.cloud.bytedance.open.util.decrypt.DecryptMobileUtil;
 import com.walnut.cloud.bytedance.open.util.json.ByteOpenGsonBuilder;
@@ -47,8 +48,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
-import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.DOU_STAR_HOT_LIST_URL;
-import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.DOU_USER_ITEM_DATA_URL;
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.*;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FANS_LIST_URL;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FOLLOW_LIST_URL;
 
@@ -487,8 +487,11 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @return 达人指数
      */
     @Override
-    public String getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException {
-        return get("https://open.douyin.com/star/author_score_v2?unique_id=" + uniqueId, null);
+    public ByteOpenStarAuthorScoreV2 getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException {
+        String currentUrl = String.format(DOU_STAR_AUTHOR_SCORE_V2_URL.getUrl(getByteOpenConfigStorage()),
+                uniqueId);
+        String responseContent = get(currentUrl, null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarAuthorScoreV2.class);
     }
 
     /**
