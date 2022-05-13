@@ -10,6 +10,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenQueryAuthResult;
+import com.walnut.cloud.bytedance.open.bean.result.data.star.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemResult;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFollow;
@@ -46,6 +47,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.DOU_STAR_HOT_LIST_URL;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.DOU_USER_ITEM_DATA_URL;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FANS_LIST_URL;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FOLLOW_LIST_URL;
@@ -462,8 +464,11 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @return  抖音星图达人热榜
      */
     @Override
-    public String getStarHotList(int hotListType) throws ByteErrorException {
-        return get("https://open.douyin.com/star/hot_list?hot_list_type=" + hotListType, null);
+    public ByteOpenStarHotListResult getStarHotList(int hotListType) throws ByteErrorException {
+        String currentUrl = String.format(DOU_STAR_HOT_LIST_URL.getUrl(getByteOpenConfigStorage()),
+                hotListType);
+        String responseContent = get(currentUrl, null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarHotListResult.class);
     }
 
     /**

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>WalnutThirdPartyPoly</artifactId>
         <groupId>com.walnut-cloud.open</groupId>
-        <version>1.1.0</version>
+        <version>1.1.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.walnut-cloud.open</groupId>
             <artifactId>walnut-java-common</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.3</version>
         </dependency>
     </dependencies>
 </project>
