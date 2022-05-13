@@ -9,10 +9,12 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenHotVideoBillboard;
+import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenHotVideoBillboardResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
-import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl;
@@ -563,6 +565,17 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
     @Override
     public String getHotSearchVideos(String hotSentence) throws ByteErrorException {
         return get("https://open.douyin.com/hotsearch/videos/?hot_sentence=" + hotSentence, null);
+    }
+
+    /**
+     * <h3> 数据开放服务 - 榜单数据 - 热门视频榜单 </h3>
+     * @return 热门书品榜单数据
+     * @throws ByteErrorException 异常
+     */
+    @Override
+    public ByteOpenHotVideoBillboardResult getHotVideoBillboard() throws ByteErrorException {
+        String responseContent = get(DOU_BILLBOARD_HOT_VIDEO_URL.getUrl(getByteOpenConfigStorage()), null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenHotVideoBillboardResult.class);
     }
 
     /**

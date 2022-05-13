@@ -2,10 +2,11 @@ package com.walnut.cloud.bytedance.open.api;
 
 
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
+import com.walnut.cloud.bytedance.open.bean.result.ByteOpenHotVideoBillboardResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
-import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
@@ -276,6 +277,12 @@ public interface ByteOpenOauthService {
      */
     String getHotSearchVideos(String hotSentence) throws ByteErrorException;
 
+    /**
+     * <h3> 数据开放服务 - 榜单数据 - 热门视频榜 </h3>
+     * @return 热门视频榜单
+     * @throws ByteErrorException 异常
+     */
+    ByteOpenHotVideoBillboardResult getHotVideoBillboard() throws ByteErrorException;
     /**
      * <h3> 数据开放服务 - 榜单数据 </h3>
      * @param cate 榜单类型 [hot_video:热门视频榜,sport:体育榜，amusement:搞笑榜,game:游戏榜,food:美食榜，drama:剧情榜,car:汽车榜,travel:旅游榜，cospa:二次元榜，stars:娱乐明星榜，live:直播榜，music:音乐榜，topic:话题榜，prop:道具榜]

@@ -1,4 +1,4 @@
-package com.walnut.cloud.bytedance.open.bean.star;
+package com.walnut.cloud.bytedance.open.bean.data.star;
 
 import lombok.Data;
 
