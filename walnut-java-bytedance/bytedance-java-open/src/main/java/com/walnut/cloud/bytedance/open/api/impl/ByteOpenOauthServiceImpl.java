@@ -10,6 +10,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenQueryAuthResult;
+import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemResult;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFollow;
 import com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl;
@@ -44,6 +45,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
+
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.DOU_USER_ITEM_DATA_URL;
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FANS_LIST_URL;
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FOLLOW_LIST_URL;
 
 
 @Slf4j
@@ -302,7 +307,7 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public ByteOpenFans getFansList(String openId, int cursor, int count) throws ByteErrorException {
-        String currentUrl = String.format(ByteOpenApiUrl.User.DOU_GET_FANS_LIST_URL.getUrl(getByteOpenConfigStorage()),
+        String currentUrl = String.format(DOU_GET_FANS_LIST_URL.getUrl(getByteOpenConfigStorage()),
                 openId, cursor, count);
         String responseContent = get(currentUrl, openId);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenFans.class);
@@ -318,10 +323,9 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public ByteOpenFollow getFollowingList(String openId, int cursor, int count) throws ByteErrorException {
-        String currentUrl = String.format(ByteOpenApiUrl.User.DOU_GET_FOLLOW_LIST_URL.getUrl(getByteOpenConfigStorage()),
+        String currentUrl = String.format(DOU_GET_FOLLOW_LIST_URL.getUrl(getByteOpenConfigStorage()),
                 openId, cursor, count);
         String responseContent = get(currentUrl, openId);
-        log.info("关注列表：[{}]", responseContent);
         return  ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenFollow.class);
     }
 
@@ -417,8 +421,11 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @throws ByteErrorException 异常
      */
     @Override
-    public String getUserData(String type, String openId, int dateType) throws ByteErrorException {
-        return get("https://open.douyin.com/data/external/user/" + type + "?open_id=" + openId + "&date_type=" + dateType, openId);
+    public ByteOpenUserItemResult getUserData(String type, String openId, int dateType) throws ByteErrorException {
+        String currentUrl = String.format(DOU_USER_ITEM_DATA_URL.getUrl(getByteOpenConfigStorage()),
+                openId, dateType);
+        String responseContent = get(currentUrl, openId);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenUserItemResult.class);
     }
 
     /**

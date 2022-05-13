@@ -3,6 +3,8 @@ package com.walnut.cloud.bytedance.open.api;
 
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenQueryAuthResult;
+import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemData;
+import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemResult;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFollow;
 import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
@@ -181,7 +183,7 @@ public interface ByteOpenOauthService {
      * @return 用户相关数据
      * @throws ByteErrorException 异常
      */
-    String getUserData(String type, String openId, int dateType) throws ByteErrorException;
+    ByteOpenUserItemResult getUserData(String type, String openId, int dateType) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 粉丝画像数据 </h3>
