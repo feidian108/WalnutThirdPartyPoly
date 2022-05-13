@@ -24,14 +24,14 @@
 </tr>
 <tr>
 <td align="center" valign="middle">
-<img width="180"  src="https://images.gitee.com/uploads/images/2022/0506/121920_d78216de_7899541.png">
+<img width="180"  src="https://images.gitee.com/uploads/images/2022/0506/121920_d78216de_7899541.png" alt="开发动态微信群">
 </td>
 <td align="center" valign="middle">
-<img width="180" src="https://images.gitee.com/uploads/images/2022/0506/121939_4c469633_7899541.png">
+<img width="180" src="https://images.gitee.com/uploads/images/2022/0506/121939_4c469633_7899541.png" alt="技术交流微信群">
 </td>
-<td><img width="180" src="https://images.gitee.com/uploads/images/2022/0506/123151_9063e62b_7899541.png"></td>
+<td><img width="180" src="https://images.gitee.com/uploads/images/2022/0506/123151_9063e62b_7899541.png" alt="技术交流QQ群"></td>
 <td>
-<img width="180" src="https://images.gitee.com/uploads/images/2022/0506/130451_a48eaff4_7899541.png">
+<img width="180" src="https://images.gitee.com/uploads/images/2022/0506/130451_a48eaff4_7899541.png" alt="开发动态QQ群">
 </td>
 </tr>
 </table>
@@ -41,6 +41,19 @@
 github 项目地址：https://github.com/feidian108/WalnutThirdPartyPoly.git
 
 gitee  项目地址：https://gitee.com/walnutcloud/third-party-poly.git
+
+--------------------------------
+
+### Maven 引用方式
+注意：最新版本（包括测试版）为 [![GitHub release](https://img.shields.io/github/v/release/feidian108/WalnutThirdPartyPoly.svg)](https://github.com/feidian108/WalnutThirdPartyPoly/releases) ，以下为最新正式版。
+
+```xml
+<dependency>
+  <groupId>com.walnut-cloud.open</groupId>
+  <artifactId>（不同模块参考下文）</artifactId>
+  <version>1.1.1</version>
+</dependency>
+```
 ### 其他
 ### 贡献者列表
 
