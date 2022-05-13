@@ -5,13 +5,15 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class ByteOpenStarAuthorScoreV2 implements Serializable {
+public class ByteOpenStarAuthorScore implements Serializable {
 
     private static final long serialVersionUID = -8713680081354754208L;
 
     private String uniqueId;
 
     private String nickName;
+
+    private int follower;
 
     private float cooperationScore;
 

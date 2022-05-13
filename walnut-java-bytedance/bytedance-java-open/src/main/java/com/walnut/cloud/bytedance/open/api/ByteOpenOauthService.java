@@ -5,7 +5,7 @@ import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
-import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScoreV2;
+import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
@@ -218,14 +218,14 @@ public interface ByteOpenOauthService {
      * @param openId 用户ID
      * @return 达人指数
      */
-    String getStarTopScoreDisplay(String openId) throws ByteErrorException;
+    ByteOpenStarAuthorScore getStarTopScoreDisplay(String openId) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 星图数据 - 获取抖音星图达人指数数据V2</h3>
      * @param uniqueId 达人抖音号
      * @return 达人指数数据
      */
-    ByteOpenStarAuthorScoreV2 getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException;
+    ByteOpenStarAuthorScore getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 抖音影视综艺榜单数据 - 获取 本周 抖音电影榜、抖音电视剧榜、抖音综艺榜 </h3>

@@ -12,7 +12,7 @@ import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
-import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScoreV2;
+import com.walnut.cloud.bytedance.open.bean.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl;
@@ -477,8 +477,11 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @return 抖音星图达人指数
      */
     @Override
-    public String getStarTopScoreDisplay(String openId) throws ByteErrorException {
-        return get("https://open.douyin.com/star/author_score?open_id=" + openId, openId);
+    public ByteOpenStarAuthorScore getStarTopScoreDisplay(String openId) throws ByteErrorException {
+        String currentUrl = String.format(DOU_STAR_AUTHOR_SCORE_URL.getUrl(getByteOpenConfigStorage()),
+                openId);
+        String responseContent = get(currentUrl, openId);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarAuthorScore.class);
     }
 
     /**
@@ -487,11 +490,11 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @return 达人指数
      */
     @Override
-    public ByteOpenStarAuthorScoreV2 getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException {
+    public ByteOpenStarAuthorScore getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException {
         String currentUrl = String.format(DOU_STAR_AUTHOR_SCORE_V2_URL.getUrl(getByteOpenConfigStorage()),
                 uniqueId);
         String responseContent = get(currentUrl, null);
-        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarAuthorScoreV2.class);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarAuthorScore.class);
     }
 
     /**
