@@ -3,7 +3,7 @@ package com.walnut.cloud.bytedance.open.api;
 
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.result.auth.ByteOpenQueryAuthResult;
-import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemData;
+import com.walnut.cloud.bytedance.open.bean.result.data.star.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.item.ByteOpenUserItemResult;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.result.user.ByteOpenFollow;
@@ -210,7 +210,7 @@ public interface ByteOpenOauthService {
      * @param hotListType 达人热榜类型 * `1` - 星图指数榜 * `2` - 涨粉指数榜 * `3` - 性价比指数榜 * `4` - 种草指数榜 * `5` - 精选指数榜 * `6` - 传播指数榜
      * @return 抖音星图达人热榜
      */
-    String getStarHotList(int hotListType) throws ByteErrorException;
+    ByteOpenStarHotListResult getStarHotList(int hotListType) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 星图数据 - 获取抖音星图达人指数 </h3>
