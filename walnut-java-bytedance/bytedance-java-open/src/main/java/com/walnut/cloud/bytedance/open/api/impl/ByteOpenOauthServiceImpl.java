@@ -9,12 +9,8 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenHotVideoBillboard;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenHotVideoBillboardResult;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
+import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl;
@@ -342,6 +338,7 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public String getDouYinVideoList(String openId, int cursor, int count) throws ByteErrorException {
+
         return get("https://open.douyin.com/video/list/?open_id=" + openId + "&cursor=" + cursor + "&count=" + count, openId);
     }
 
@@ -399,6 +396,8 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public String getItemCommentList(String openId, String itemId, String sortType, int cursor, int count) throws ByteErrorException {
+        String currentUrl = String.format(DOU_ITEM_COMMENT_DATA_URL.getUrl(getByteOpenConfigStorage()),
+                openId, itemId, sortType, cursor, count);
         return get("https://open.douyin.com/item/comment/list/?open_id=" + openId + "&item_id=" + itemId + "&sort_type=" + sortType + "&cursor=" + cursor + "&count=" + count, openId);
     }
 
@@ -530,8 +529,12 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @throws ByteErrorException 异常
      */
     @Override
-    public String getDiscoveryEntRankVersion(int cursor, int count, int type) throws ByteErrorException {
-        return get("https://open.douyin.com/discovery/ent/rank/version?cursor=" +count + "&count=" + count + "&type=" + type, null);
+    public ByteOpenRankVersionResult getDiscoveryEntRankVersion(int cursor, int count, int type) throws ByteErrorException {
+
+        String currentUrl = String.format(DOU_DISCOVERY_ENT_RANK_VERSION_URL.getUrl(getByteOpenConfigStorage()),
+                type, count, cursor);
+        String responseContent = get(currentUrl, null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenRankVersionResult.class);
     }
 
     /**
