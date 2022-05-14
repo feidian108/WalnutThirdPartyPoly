@@ -3,10 +3,7 @@ package com.walnut.cloud.bytedance.open.api;
 
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenHotVideoBillboardResult;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenQueryAuthResult;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
-import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
+import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
@@ -250,7 +247,7 @@ public interface ByteOpenOauthService {
      * @param type 榜单类型： * 1 - 电影 * 2 - 电视剧 * 3 - 综艺
      * @return 榜单版本数据
      */
-    String getDiscoveryEntRankVersion(int cursor, int count, int type) throws ByteErrorException;
+    ByteOpenRankVersionResult getDiscoveryEntRankVersion(int cursor, int count, int type) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 热点视频数据 - 获取实时热点词 </h3>
