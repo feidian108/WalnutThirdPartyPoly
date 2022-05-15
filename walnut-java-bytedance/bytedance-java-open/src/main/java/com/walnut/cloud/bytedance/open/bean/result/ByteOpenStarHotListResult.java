@@ -13,7 +13,7 @@ public class ByteOpenStarHotListResult implements Serializable {
 
     private String hotListDescription;
 
-    private String hotListType;
+    private int hotListType;
 
     private int hotListUpdateTimestamp;
 

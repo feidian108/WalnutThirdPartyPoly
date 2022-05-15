@@ -5,12 +5,12 @@
     <parent>
         <artifactId>WalnutThirdPartyPoly</artifactId>
         <groupId>com.walnut-cloud.open</groupId>
-        <version>1.2.4</version>
+        <version>1.2.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>walnut-java-bytedance</artifactId>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
     <name>工具包 - 字节跳动服务模块</name>
     <packaging>pom</packaging>
 
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.walnut-cloud.open</groupId>
             <artifactId>walnut-java-common</artifactId>
-            <version>1.2.4</version>
+            <version>1.2.5</version>
         </dependency>
     </dependencies>
 </project>
