@@ -225,20 +225,14 @@ public interface ByteOpenOauthService {
      */
     ByteOpenStarAuthorScore getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException;
 
-    /**
-     * <h3> 数据开放服务 - 抖音影视综艺榜单数据 - 获取 本周 抖音电影榜、抖音电视剧榜、抖音综艺榜 </h3>
-     * @param type 榜单类型： * 1 - 电影 * 2 - 电视剧 * 3 - 综艺
-     * @return 榜单数据
-     */
-    String getDiscoveryEntRankItem(int type) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 抖音影视综艺榜单数据 - 获取抖音电影榜、抖音电视剧榜、抖音综艺榜 </h3>
      * @param type 榜单类型： * 1 - 电影 * 2 - 电视剧 * 3 - 综艺
-     * @param version 榜单版本：空值默认为本周榜单
+     * @param version 榜单版本：0默认为本周榜单
      * @return 榜单数据
      */
-    String getDiscoveryEntRankItem(int type, int version) throws ByteErrorException;
+    ByteOpenRankItemResult getDiscoveryEntRankItem(int type, int version) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 抖音影视综艺榜单数据 - 获取抖音影视综榜单版本 </h3>
