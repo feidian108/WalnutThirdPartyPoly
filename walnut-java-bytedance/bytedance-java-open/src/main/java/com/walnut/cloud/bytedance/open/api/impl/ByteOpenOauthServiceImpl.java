@@ -9,6 +9,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.data.ent.ByteOpenRankItem;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
@@ -498,16 +499,6 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarAuthorScore.class);
     }
 
-    /**
-     * <h3> 数据开放服务 - 抖音影视综艺榜单数据 - 获取 本周 抖音电影榜、抖音电视剧榜、抖音综艺榜 </h3>
-     * @param type 榜单类型： * 1 - 电影 * 2 - 电视剧 * 3 - 综艺
-     * @return 本周榜单数据
-     * @throws ByteErrorException 异常
-     */
-    @Override
-    public String getDiscoveryEntRankItem(int type) throws ByteErrorException {
-        return  get("https://open.douyin.com/discovery/ent/rank/item?type=" + type, null);
-    }
 
     /**
      * <h3> 数据开放服务 - 抖音影视综艺榜单数据 - 获取抖音电影榜、抖音电视剧榜、抖音综艺榜 </h3>
@@ -516,8 +507,16 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @return 榜单数据
      */
     @Override
-    public String getDiscoveryEntRankItem(int type, int version) throws ByteErrorException {
-        return get("https://open.douyin.com/discovery/ent/rank/item?type=" + type + "&version=" + version, null);
+    public ByteOpenRankItemResult getDiscoveryEntRankItem(int type, int version) throws ByteErrorException {
+        String currentUrl = String.format(DOU_DISCOVERY_ENT_RANK_ITEM_URL.getUrl(getByteOpenConfigStorage()),
+                type, version);
+        if (version == 0) {
+            currentUrl = currentUrl.replace("&version=", "&version=" + version);
+        } else {
+            currentUrl = currentUrl.replace("&version=", "");
+        }
+        String responseContent = get(currentUrl, null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenRankItemResult.class);
     }
 
     /**
