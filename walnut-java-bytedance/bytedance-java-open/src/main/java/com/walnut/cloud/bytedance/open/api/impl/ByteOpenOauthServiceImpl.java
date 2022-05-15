@@ -9,8 +9,9 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
-import com.walnut.cloud.bytedance.open.bean.data.ent.ByteOpenRankItem;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
 import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
@@ -50,6 +51,7 @@ import java.util.concurrent.locks.Lock;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.*;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FANS_LIST_URL;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FOLLOW_LIST_URL;
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.Video.DOU_VIDEO_LIST_URL;
 
 
 @Slf4j
@@ -338,9 +340,11 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @return 视频列表信息
      */
     @Override
-    public String getDouYinVideoList(String openId, int cursor, int count) throws ByteErrorException {
-
-        return get("https://open.douyin.com/video/list/?open_id=" + openId + "&cursor=" + cursor + "&count=" + count, openId);
+    public ByteOpenUserVideoList getDouYinVideoList(String openId, int cursor, int count) throws ByteErrorException {
+        String currentUrl = String.format(DOU_VIDEO_LIST_URL.getUrl(getByteOpenConfigStorage()),
+                openId, cursor, count);
+        String responseContent = get(currentUrl, openId);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenUserVideoList.class);
     }
 
     /**
@@ -351,10 +355,13 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @throws ByteErrorException 异常
      */
     @Override
-    public String getDouYinVideoData(String openId, List<String> itemsIds) throws ByteErrorException {
+    public ByteOpenUserVideoData getDouYinVideoData(String openId, List<String> itemsIds) throws ByteErrorException {
         JSONObject json = new JSONObject();
         json.put("item_ids", itemsIds.toArray());
-        return post("https://open.douyin.com/video/data/?open_id=" + openId, openId, json.toString());
+        String currentUrl = String.format(DOU_VIDEO_LIST_URL.getUrl(getByteOpenConfigStorage()),
+                openId);
+        String responseContent = post(currentUrl, openId, json.toString());
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenUserVideoData.class);
     }
 
     /**

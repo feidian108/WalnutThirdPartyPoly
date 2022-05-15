@@ -64,6 +64,18 @@ public interface ByteOpenApiUrl {
 
     @AllArgsConstructor
     @Getter
+    enum Video implements ByteOpenApiUrl {
+
+        DOU_VIDEO_LIST_URL(API_DEFAULT_HOST_URL, "/video/list/?open_id=%s&cursor=%s&count=%s"),
+        DOU_VIDEO_DATA_URL( API_DEFAULT_HOST_URL, "/video/data/?open_id=%s" ),
+        ;
+
+        private final String prefix;
+        private final String path;
+    }
+
+    @AllArgsConstructor
+    @Getter
     enum DataExternal implements ByteOpenApiUrl {
 
         DOU_USER_ITEM_DATA_URL( API_DEFAULT_HOST_URL, "/data/external/user/item/?open_id=%s&date_type=%s" ),

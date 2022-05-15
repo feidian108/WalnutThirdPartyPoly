@@ -3,6 +3,8 @@ package com.walnut.cloud.bytedance.open.api;
 
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
 import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
@@ -121,7 +123,7 @@ public interface ByteOpenOauthService {
      * @param count 每页数量
      * @return 视频列表信息
      */
-    String getDouYinVideoList( String openId, int cursor, int count ) throws ByteErrorException;
+    ByteOpenUserVideoList getDouYinVideoList(String openId, int cursor, int count ) throws ByteErrorException;
 
     /**
      * <h3> 视频管理 - 抖音 - 查询视频 - 查询特定视频的视频数据 </h3>
@@ -130,7 +132,7 @@ public interface ByteOpenOauthService {
      * @return 视频数据
      * @throws ByteErrorException 异常信息
      */
-    String getDouYinVideoData(String openId, List<String> itemsIds) throws ByteErrorException;
+    ByteOpenUserVideoData getDouYinVideoData(String openId, List<String> itemsIds) throws ByteErrorException;
 
     /**
      * <h3> 视频管理 - 抖音 - 查询视频 - 查询抖音视频来源 </h3>
