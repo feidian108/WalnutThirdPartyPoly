@@ -17,7 +17,7 @@ public class ByteOpenStarHotListGsonAdapter implements JsonDeserializer<ByteOpen
     public ByteOpenStarHotListResult deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         ByteOpenStarHotListResult starHotListResult = new ByteOpenStarHotListResult();
         JsonObject jsonObject = jsonElement.getAsJsonObject().getAsJsonObject("data");
-        starHotListResult.setHotListType(GsonHelper.getString( jsonObject, "hot_list_type"));
+        starHotListResult.setHotListType(GsonHelper.getInteger( jsonObject, "hot_list_type"));
         starHotListResult.setHotListDescription(GsonHelper.getString(jsonObject, "hot_list_description"));
         starHotListResult.setHotListUpdateTimestamp(GsonHelper.getInteger(jsonObject, "hot_list_update_timestamp"));
 
