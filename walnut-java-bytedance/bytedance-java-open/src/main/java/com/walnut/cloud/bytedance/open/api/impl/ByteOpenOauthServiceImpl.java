@@ -10,6 +10,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenMusicBillboardList;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenTopicBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
@@ -434,9 +435,8 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public ByteOpenUserItemResult getUserData(String type, String openId, int dateType) throws ByteErrorException {
-        String currentUrl = String.format(DOU_USER_ITEM_DATA_URL.getUrl(getByteOpenConfigStorage()),
-                openId, dateType);
-        String responseContent = get(currentUrl, openId);
+        String responseContent = get(String.format(DOU_USER_ITEM_DATA_URL.getUrl(getByteOpenConfigStorage()),
+                openId, dateType), openId);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenUserItemResult.class);
     }
 
@@ -475,9 +475,8 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public ByteOpenStarHotListResult getStarHotList(int hotListType) throws ByteErrorException {
-        String currentUrl = String.format(DOU_STAR_HOT_LIST_URL.getUrl(getByteOpenConfigStorage()),
-                hotListType);
-        String responseContent = get(currentUrl, null);
+        String responseContent = get(String.format(DOU_STAR_HOT_LIST_URL.getUrl(getByteOpenConfigStorage()),
+                hotListType), null);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarHotListResult.class);
     }
 
@@ -488,9 +487,8 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public ByteOpenStarAuthorScore getStarTopScoreDisplay(String openId) throws ByteErrorException {
-        String currentUrl = String.format(DOU_STAR_AUTHOR_SCORE_URL.getUrl(getByteOpenConfigStorage()),
-                openId);
-        String responseContent = get(currentUrl, openId);
+        String responseContent = get(String.format(DOU_STAR_AUTHOR_SCORE_URL.getUrl(getByteOpenConfigStorage()),
+                openId), openId);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarAuthorScore.class);
     }
 
@@ -501,9 +499,8 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public ByteOpenStarAuthorScore getStarAuthorScoreDisplay(String uniqueId) throws ByteErrorException {
-        String currentUrl = String.format(DOU_STAR_AUTHOR_SCORE_V2_URL.getUrl(getByteOpenConfigStorage()),
-                uniqueId);
-        String responseContent = get(currentUrl, null);
+        String responseContent = get(String.format(DOU_STAR_AUTHOR_SCORE_V2_URL.getUrl(getByteOpenConfigStorage()),
+                uniqueId), null);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenStarAuthorScore.class);
     }
 
@@ -537,10 +534,8 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      */
     @Override
     public ByteOpenRankVersionResult getDiscoveryEntRankVersion(int cursor, int count, int type) throws ByteErrorException {
-
-        String currentUrl = String.format(DOU_DISCOVERY_ENT_RANK_VERSION_URL.getUrl(getByteOpenConfigStorage()),
-                type, count, cursor);
-        String responseContent = get(currentUrl, null);
+        String responseContent = get(String.format(DOU_DISCOVERY_ENT_RANK_VERSION_URL.getUrl(getByteOpenConfigStorage()),
+                type, count, cursor), null);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenRankVersionResult.class);
     }
 
@@ -615,12 +610,22 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenMusicBillboardList.class);
     }
 
+    /**
+     * <h3> 数据开放 - 榜单数据 - 话题榜数据 </h3>
+     * @return 榜单数据
+     * @throws ByteErrorException 异常
+     */
+    @Override
+    public ByteOpenTopicBillboardList getTopicBillboard() throws ByteErrorException {
+        String responseContent = get(DOU_BILLBOARD_TOPIC_URL.getUrl(getByteOpenConfigStorage()), null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenTopicBillboardList.class);
+    }
+
 
     /**
      * <h3> 数据开放服务 - 榜单数据 </h3>
      * @param cate 榜单类型 [hot_video:热门视频榜,sport:体育榜，amusement:搞笑榜,game:游戏榜,food:美食榜，drama:剧情榜,car:汽车榜,travel:旅游榜，cospa:二次元榜，stars:娱乐明星榜，live:直播榜，music:音乐榜，topic:话题榜，prop:道具榜]
      * @param type 榜单类型
-     *          <p> 热门视频榜：[]</p>
      *          <p> 体育榜：[overall:总榜,basketball:篮球榜,soccer:足球榜,comprehensive:综合体育榜,fitness:运动健身榜,outdoors:户外运动榜,table_tennis:台球榜,culture:运动文化榜]</p>
      *          <p> 搞笑榜：[overall:总榜,new:新势力榜]</p>
      *          <p> 游戏榜：[console:单机主机榜,inf:游戏资讯榜]</p>
@@ -631,8 +636,6 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      *          <p> 二次元：[overall:总榜,qing_man:轻漫,out_shot:出镜拍摄,painting:绘画,voice_control:声控,brain_cavity:脑洞,new:新势力榜]</p>
      *          <p> 娱乐明星：[]</p>
      *          <p> 直播榜：[]</p>
-     *          <p> 音乐榜：[hot:热歌榜,soar:飙升榜,original:原创榜]</p>
-     *          <p> 话题榜：[]</p>
      *          <p> 道具榜：[]</p>
      * @return  榜单数据
      * @throws ByteErrorException 异常
