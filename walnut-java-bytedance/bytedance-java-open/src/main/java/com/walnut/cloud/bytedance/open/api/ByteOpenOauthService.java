@@ -2,10 +2,7 @@ package com.walnut.cloud.bytedance.open.api;
 
 
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenLiveBillboardList;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenMusicBillboardList;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenPropBillboardList;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenTopicBillboardList;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.*;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
@@ -331,7 +328,7 @@ public interface ByteOpenOauthService {
      * @return 榜单数据
      * @throws ByteErrorException 异常
      */
-    String getBillboard(String cate, String type) throws ByteErrorException;
+    ByteOpenBillboardList getBillboard(String cate, String type) throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 获取SDK分享视频数据 </h3>

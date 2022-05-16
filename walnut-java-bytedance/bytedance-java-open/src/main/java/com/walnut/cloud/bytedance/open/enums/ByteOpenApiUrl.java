@@ -141,8 +141,8 @@ public interface ByteOpenApiUrl {
         DOU_BILLBOARD_TRAVEL_OVERALL_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/travel/overall/" ),
         DOU_BILLBOARD_TRAVEL_NEW_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/travel/new/" ),
 
-        DOU_BILLBOARD_COSPLAY_OVERALL_INF_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/cospa/overall/" ),
-        DOU_BILLBOARD_COSPLAY_QING_MAN_INF_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/cospa/qing_man/" ),
+        DOU_BILLBOARD_COSPLAY_OVERALL_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/cospa/overall/" ),
+        DOU_BILLBOARD_COSPLAY_QING_MAN_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/cospa/qing_man/" ),
         DOU_BILLBOARD_COSPLAY_OUT_SHOT_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/cospa/out_shot/" ),
         DOU_BILLBOARD_COSPLAY_PAINTING_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/cospa/painting/" ),
         DOU_BILLBOARD_COSPLAY_VOICE_CONTROL_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/cospa/voice_control/" ),
