@@ -9,10 +9,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenLiveBillboardList;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenMusicBillboardList;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenPropBillboardList;
-import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenTopicBillboardList;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.*;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
@@ -658,15 +655,14 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      *          <p> 汽车榜：[overall:总榜,comment:评车,play:玩车,use:用车,driver:驾车]</p>
      *          <p> 旅游榜：[overall:总榜,new:新势力榜]</p>
      *          <p> 二次元：[overall:总榜,qing_man:轻漫,out_shot:出镜拍摄,painting:绘画,voice_control:声控,brain_cavity:脑洞,new:新势力榜]</p>
-     *          <p> 娱乐明星：[]</p>
-     *          <p> 直播榜：[]</p>
-     *          <p> 道具榜：[]</p>
      * @return  榜单数据
      * @throws ByteErrorException 异常
      */
     @Override
-    public String getBillboard(String cate, String type) throws ByteErrorException {
-        return get("https://open.douyin.com/data/extern/billboard/" + cate + "/"+type, null);
+    public ByteOpenBillboardList getBillboard(String cate, String type) throws ByteErrorException {
+        String url = getBillboardUrlByCateAndType(cate, type);
+        String responseContent = get(url, null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenBillboardList.class);
     }
 
     /**
@@ -794,5 +790,190 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
             default:
                 throw new ByteRuntimeException("不存在的帐号授权信息！");
         }
+    }
+
+    /**
+     * <h3> 数据开放 - 榜单数据 </h3>
+     * @param category 分类
+     * @param type 明细类
+     * @return 链接地址
+     */
+    private String getBillboardUrlByCateAndType( String category, String type ) {
+        String url;
+        switch ( category ) {
+            case "sport":
+                url = this.getSportBillboardUrlByType(type);
+                break;
+            case "amusement":
+                if(Objects.equals(type, "overall")) {
+                    url = DOU_BILLBOARD_AMUSEMENT_OVERALL_URL.getUrl(getByteOpenConfigStorage());
+                } else if(Objects.equals(type, "new")) {
+                    url = DOU_BILLBOARD_AMUSEMENT_NEW_URL.getUrl(getByteOpenConfigStorage());
+                } else{
+                    throw new ByteRuntimeException("[搞笑类]榜单不存在[" + type + "]明细类榜单数据");
+                }
+                break;
+            case "game":
+                if(Objects.equals(type, "console")) {
+                    url = DOU_BILLBOARD_GAME_CONSOLE_URL.getUrl(getByteOpenConfigStorage());
+                } else if(Objects.equals(type, "inf")) {
+                    url = DOU_BILLBOARD_GAME_INF_URL.getUrl(getByteOpenConfigStorage());
+                } else{
+                    throw new ByteRuntimeException("[游戏类]榜单不存在[" + type + "]明细类榜单数据");
+                }
+                break;
+            case "food":
+                url = this.getFoodBillboardUrlByType(type);
+                break;
+            case "drama":
+                url = DOU_BILLBOARD_DRAMA_OVERALL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "car":
+                url = this.getCarBillboardUrlByType(type);
+                break;
+            case "travel":
+                if(Objects.equals(type, "overall")) {
+                    url = DOU_BILLBOARD_TRAVEL_OVERALL_URL.getUrl(getByteOpenConfigStorage());
+                } else if(Objects.equals(type, "new")) {
+                    url = DOU_BILLBOARD_TRAVEL_NEW_URL.getUrl(getByteOpenConfigStorage());
+                } else{
+                    throw new ByteRuntimeException("[旅游类]榜单不存在[" + type + "]明细类榜单数据");
+                }
+                break;
+            case "cospa":
+                url = this.getCosplayBillboardUrlByType(type);
+                break;
+            default:
+                throw new ByteRuntimeException("不存在的榜单类型！");
+        }
+        return url;
+    }
+
+    /**
+     * <h3> 体育类榜单分类地址构建 </h3>
+     * @param type 榜单分类
+     * @return 链接地址
+     */
+    private String getSportBillboardUrlByType(String type) {
+        String url;
+        switch (type) {
+            case "overall":
+                url = DOU_BILLBOARD_SPORT_OVERALL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "basketball":
+                url = DOU_BILLBOARD_SPORT_BASKETBALL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "soccer":
+                url = DOU_BILLBOARD_SPORT_SOCCER_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "comprehensive":
+                url = DOU_BILLBOARD_SPORT_COMPREHENSIVE_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "fitness":
+                url = DOU_BILLBOARD_SPORT_FITNESS_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "outdoors":
+                url = DOU_BILLBOARD_SPORT_OUTDOORS_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "table_tennis":
+                url = DOU_BILLBOARD_SPORT_TABLE_TENNIS_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "culture":
+                url = DOU_BILLBOARD_SPORT_CULTURE_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            default:
+                throw new ByteRuntimeException("[体育类]榜单不存在[" + type + "]明细类榜单数据");
+        }
+        return url;
+    }
+
+    /**
+     * <h3> 美食类榜单分类地址构建 </h3>
+     * @param type 榜单分类
+     * @return 链接地址
+     */
+    private String getFoodBillboardUrlByType(String type) {
+        String url;
+        switch (type) {
+            case "overall":
+                url = DOU_BILLBOARD_FOOD_OVERALL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "new":
+                url = DOU_BILLBOARD_FOOD_NEW_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "tutorial":
+                url = DOU_BILLBOARD_FOOD_TUTORIAL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "shop":
+                url = DOU_BILLBOARD_FOOD_SHOP_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            default:
+                throw new ByteRuntimeException("[美食类]榜单不存在[" + type + "]明细类榜单数据");
+        }
+        return url;
+    }
+
+    /**
+     * <h3> 汽车类榜单分类地址构建 </h3>
+     * @param type 分类
+     * @return 链接地址
+     */
+    private String getCarBillboardUrlByType(String type) {
+        String url;
+        switch (type) {
+            case "overall":
+                url = DOU_BILLBOARD_CAR_OVERALL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "comment":
+                url = DOU_BILLBOARD_CAR_COMMENT_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "play":
+                url = DOU_BILLBOARD_CAR_PLAY_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "use":
+                url = DOU_BILLBOARD_CAR_USE_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "driver":
+                url = DOU_BILLBOARD_CAR_DRIVER_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            default:
+                throw new ByteRuntimeException("[汽车类]榜单不存在[" + type + "]明细类榜单数据");
+        }
+        return url;
+    }
+
+    /**
+     * <h3> 二次元类榜单分类地址构建 </h3>
+     * @param type 类型
+     * @return 链接地址
+     */
+    private String getCosplayBillboardUrlByType(String type) {
+        String url;
+        switch (type) {
+            case "overall":
+                url = DOU_BILLBOARD_COSPLAY_OVERALL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "new":
+                url = DOU_BILLBOARD_COSPLAY_NEW_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "qing_man":
+                url = DOU_BILLBOARD_COSPLAY_QING_MAN_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "out_shot":
+                url = DOU_BILLBOARD_COSPLAY_OUT_SHOT_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "painting":
+                url = DOU_BILLBOARD_COSPLAY_PAINTING_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "voice_control":
+                url = DOU_BILLBOARD_COSPLAY_VOICE_CONTROL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "brain_cavity":
+                url = DOU_BILLBOARD_COSPLAY_BRAIN_CAVITY_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            default:
+                throw new ByteRuntimeException("[汽车类]榜单不存在[" + type + "]明细类榜单数据");
+        }
+        return url;
     }
 }
