@@ -5,12 +5,12 @@
     <parent>
         <artifactId>walnut-java-bytedance</artifactId>
         <groupId>com.walnut-cloud.open</groupId>
-        <version>1.2.10</version>
+        <version>1.2.11</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>bytedance-java-open</artifactId>
-    <version>1.2.10</version>
+    <version>1.2.11</version>
     <name>工具包 - 字节跳动抖音开放平台</name>
 
     <properties>
