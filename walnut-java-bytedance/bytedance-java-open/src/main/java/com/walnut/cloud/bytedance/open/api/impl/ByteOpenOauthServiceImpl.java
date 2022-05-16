@@ -10,6 +10,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenMusicBillboardList;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenPropBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenTopicBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
@@ -619,6 +620,17 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
     public ByteOpenTopicBillboardList getTopicBillboard() throws ByteErrorException {
         String responseContent = get(DOU_BILLBOARD_TOPIC_URL.getUrl(getByteOpenConfigStorage()), null);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenTopicBillboardList.class);
+    }
+
+    /**
+     * <h3> 数据开放 - 榜单数据 - 道具榜数据 </h3>
+     * @return 榜单数据
+     * @throws ByteErrorException 异常
+     */
+    @Override
+    public ByteOpenPropBillboardList getPropBillboard() throws ByteErrorException {
+        String responseContent = get(DOU_BILLBOARD_PROP_URL.getUrl(getByteOpenConfigStorage()),  null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenPropBillboardList.class);
     }
 
 
