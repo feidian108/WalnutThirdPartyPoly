@@ -2,6 +2,7 @@ package com.walnut.cloud.bytedance.open.api;
 
 
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenLiveBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenMusicBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenPropBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenTopicBillboardList;
@@ -279,6 +280,13 @@ public interface ByteOpenOauthService {
      * @throws ByteErrorException 异常
      */
     ByteOpenHotVideoBillboardResult getHotVideoBillboard() throws ByteErrorException;
+
+    /**
+     * <h3> 数据开放 - 榜单数据 - 直播榜单 </h3>
+     * @return 榜单数据
+     * @throws ByteErrorException 异常
+     */
+    ByteOpenLiveBillboardList getLiveBillboard() throws ByteErrorException;
 
     /**
      * <h3> 数据开放服务 - 榜单数据 - 音乐榜数据 </h3>

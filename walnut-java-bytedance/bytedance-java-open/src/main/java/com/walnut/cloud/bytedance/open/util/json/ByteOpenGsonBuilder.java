@@ -8,6 +8,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenLiveBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenMusicBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenPropBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenTopicBillboardList;
@@ -52,6 +53,7 @@ public class ByteOpenGsonBuilder {
         INSTANCE.registerTypeAdapter(ByteOpenMusicBillboardList.class, new ByteOpenMusicBillboardGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenTopicBillboardList.class, new ByteOpenTopicBillboardGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenPropBillboardList.class, new ByteOpenPropBillboardGsonAdapter());
+        INSTANCE.registerTypeAdapter(ByteOpenLiveBillboardList.class, new ByteOpenLiveBillboardGsonAdapter());
 
     }
 
