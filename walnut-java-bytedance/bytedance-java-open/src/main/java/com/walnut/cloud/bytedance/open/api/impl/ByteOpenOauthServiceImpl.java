@@ -9,6 +9,7 @@ import com.walnut.cloud.bytedance.open.bean.ByteOpenClientToken;
 import com.walnut.cloud.bytedance.open.bean.ByteOpenRefreshToken;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizationInfo;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
+import com.walnut.cloud.bytedance.open.bean.data.billboard.ByteOpenMusicBillboardList;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
@@ -586,6 +587,34 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         String responseContent = get(DOU_BILLBOARD_HOT_VIDEO_URL.getUrl(getByteOpenConfigStorage()), null);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenHotVideoBillboardResult.class);
     }
+
+    /**
+     * <h3> 数据开放服务 - 榜单数据 - 音乐榜数据 </h3>
+     * @param billTye 音乐榜单类型  hot 热歌榜  soar 飙升榜 original 原创榜
+     * @return 榜单数据
+     * @throws ByteErrorException 异常
+     */
+    @Override
+    public ByteOpenMusicBillboardList getMusicBillboard(String billTye) throws ByteErrorException {
+        String currentUrl;
+
+        switch (billTye) {
+            case "hot":
+                currentUrl = DOU_BILLBOARD_MUSIC_HOT_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "soar":
+                currentUrl = DOU_BILLBOARD_MUSIC_SOAR_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            case "original":
+                currentUrl = DOU_BILLBOARD_MUSIC_ORIGINAL_URL.getUrl(getByteOpenConfigStorage());
+                break;
+            default:
+                throw new ByteRuntimeException("不支持的榜单类型！");
+        }
+        String responseContent = get(currentUrl, null);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenMusicBillboardList.class);
+    }
+
 
     /**
      * <h3> 数据开放服务 - 榜单数据 </h3>
