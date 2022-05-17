@@ -66,8 +66,62 @@ public interface ByteOpenApiUrl {
     @Getter
     enum Video implements ByteOpenApiUrl {
 
+        DOU_VIDEO_UPLOAD_URL(API_DEFAULT_HOST_URL, "/video/upload/?open_id=%s"),
+        DOU_VIDEO_PART_INIT_URL(API_DEFAULT_HOST_URL, "/video/part/init/?open_id=%s"),
+        DOU_VIDEO_PART_UPLOAD_URL(API_DEFAULT_HOST_URL, "/video/part/upload/?open_id=%s"),
+        DOU_VIDEO_PART_COMPLETE(API_DEFAULT_HOST_URL, "/video/part/complete/?upload_id=%s&open_id=%s"),
+        DOU_VIDEO_CREATE_URL(API_DEFAULT_HOST_URL, "/video/create/?open_id=%s"),
+
+        DOU_IMAGE_UPLOAD_URL(API_DEFAULT_HOST_URL, "/image/upload/?open_id=%s&upload_id=%s&part_number=&s"),
+        DOU_IMAGE_CREATE_URL(API_DEFAULT_HOST_URL, "/image/create/?open_id=%s"),
+        DOU_VIDEO_DELETE_URL(API_DEFAULT_HOST_URL, "/video/delete/?open_id=%s"),
         DOU_VIDEO_LIST_URL(API_DEFAULT_HOST_URL, "/video/list/?open_id=%s&cursor=%s&count=%s"),
         DOU_VIDEO_DATA_URL( API_DEFAULT_HOST_URL, "/video/data/?open_id=%s" ),
+
+        TOU_VIDEO_UPLOAD_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/upload/?open_id=%s"),
+        TOU_VIDEO_CREATE_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/create/?open_id=%s"),
+        TOU_VIDEO_PART_INIT_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/part/init/?open_id=%s"),
+        TOU_VIDEO_PART_UPLOAD_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/part/upload/?open_id=%s&upload_id=%s&part_number=&s"),
+        TOU_VIDEO_PART_COMPLETE_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/part/complete/?upload_id=%s&open_id=%s"),
+        TOU_VIDEO_LIST_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/list/?open_id=%s&cursor=%s&count=%s"),
+        TOU_VIDEO_DATA_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/data/?open_id=%s"),
+
+        GUA_VIDEO_UPLOAD_URL(GUA_DEFAULT_HOST_URL, "/xigua/video/upload/?open_id=%s"),
+        GUA_VIDEO_CREATE_URL(GUA_DEFAULT_HOST_URL, "/xigua/video/create/?open_id=%s"),
+        GUA_VIDEO_PART_INIT_URL(GUA_DEFAULT_HOST_URL, "/xigua/video/part/init/?open_id=%s"),
+        GUA_VIDEO_PART_UPLOAD_URL(GUA_DEFAULT_HOST_URL, "/xigua/video/part/upload/?open_id=%s&upload_id=%s&part_number=&s"),
+        GUA_VIDEO_PART_COMPLETE_URL(GUA_DEFAULT_HOST_URL, "/xigua/video/part/complete/?upload_id=%s&open_id=%s"),
+        GUA_VIDEO_LIST_URL(GUA_DEFAULT_HOST_URL, "/xigua/video/list/?open_id=%s&cursor=%s&count=%s"),
+        GUA_VIDEO_DATA_URL(GUA_DEFAULT_HOST_URL, "/xigua/video/data/?open_id=%s")
+        ;
+
+        private final String prefix;
+        private final String path;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    enum ItemComment implements ByteOpenApiUrl {
+
+        DOU_ITEM_COMMENT_LIST_URL(API_DEFAULT_HOST_URL, "/item/comment/list/?open_id=%s&cursor=%s&count=%s&item_id=%s&sort_type=%s"),
+        DOU_ITEM_COMMENT_REPLY_LIST_URL(API_DEFAULT_HOST_URL, "/item/comment/reply/list/?open_id=%s&cursor=%s&count=%s&item_id=%s&comment_id=%s&sort_type=%s"),
+        DOU_ITEM_COMMENT_REPLY_URL(API_DEFAULT_HOST_URL, "/item/comment/reply/?open_id=%s"),
+
+        DOU_MESSAGE_ONCE_SEND_URL(API_DEFAULT_HOST_URL, "/message/once/send/?open_id=%s")
+        ;
+
+        private final String prefix;
+        private final String path;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    enum VideoSearch implements ByteOpenApiUrl {
+
+        DOU_VIDEO_SEARCH_URL(API_DEFAULT_HOST_URL, "/video/search/?open_id=%s&cursor=%s&count=%s&keyword=%s"),
+        DOU_VIDEO_SEARCH_COMMENT_LIST_URL(API_DEFAULT_HOST_URL, "/video/search/comment/list/?cursor=%s&count=%s&sec_item_id=%s"),
+        DOU_VIDEO_SEARCH_COMMENT_REPLY_URL(API_DEFAULT_HOST_URL, "/video/search/comment/reply/?open_id=%s"),
+        DOU_VIDEO_SEARCH_COMMENT_REPLY_LIST_URL(API_DEFAULT_HOST_URL, "/video/search/comment/reply/list/?cursor=%s&count=%s&sec_item_id=%s&comment_id=%s"),
         ;
 
         private final String prefix;
@@ -158,6 +212,71 @@ public interface ByteOpenApiUrl {
 
         DOU_BILLBOARD_TOPIC_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/topic/" ),
         DOU_BILLBOARD_PROP_URL( API_DEFAULT_HOST_URL, "/data/extern/billboard/prop/" ),
+
+        ;
+        private final String prefix;
+        private final String path;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    enum EnterpriseLeads implements ByteOpenApiUrl {
+
+        DOU_ENTERPRISE_LEADS_USER_LIST_URL(API_DEFAULT_HOST_URL, "/enterprise/leads/user/list/?open_id=%s&cursor=%s&count=%s&start_time=%s&end_time=%s&leads_level=%s&action_type=%s"),
+        DOU_ENTERPRISE_LEADS_USER_DETAIL_URL(API_DEFAULT_HOST_URL, "/enterprise/leads/user/detail/?open_id=%s&user_id=%s"),
+        DOU_ENTERPRISE_LEADS_USER_ACTION_LIST_URL(API_DEFAULT_HOST_URL, "/enterprise/leads/user/action/list/?open_id=%s&count=%s&cursor=%s&user_id=%s&action_type=%s"),
+        DOU_ENTERPRISE_LEADS_TAG_LIST_URL(API_DEFAULT_HOST_URL, "/enterprise/leads/tag/list/?open_id=%s&cursor=%s&count=%s"),
+        DOU_ENTERPRISE_LEADS_TAG_USER_LIST_URL(API_DEFAULT_HOST_URL, "/enterprise/leads/tag/user/list/?open_id=%s&cursor=%s&count=%s&tag_id=%s"),
+        DOU_ENTERPRISE_LEADS_TAG_CREATE(API_DEFAULT_HOST_URL, "/enterprise/leads/tag/create/?open_id=%s"),
+        DOU_ENTERPRISE_LEADS_TAG_UPDATE(API_DEFAULT_HOST_URL, "/enterprise/leads/tag/update/?open_id=%s"),
+        DOU_ENTERPRISE_LEADS_TAG_DELETE(API_DEFAULT_HOST_URL, "/enterprise/leads/tag/delete/?open_id=%s"),
+        DOU_ENTERPRISE_LEADS_TAG_USER_UPDATE(API_DEFAULT_HOST_URL, " /enterprise/leads/tag/user/update/?open_id=%s"),
+
+        DOU_ENTERPRISE_VIDEO_COMMENT_LIST_URL(API_DEFAULT_HOST_URL, "/video/comment/list/?open_id=%s&cursor=%s&count=%s&item_id=%s"),
+        DOU_ENTERPRISE_VIDEO_COMMENT_REPLY_LIST_URL(API_DEFAULT_HOST_URL, "/video/comment/reply/list/?count=%s&item_id=%s&comment_id=%s&open_id=%s&cursor=%s"),
+        DOU_ENTERPRISE_VIDEO_COMMENT_REPLY_URL(API_DEFAULT_HOST_URL, "/video/comment/reply/?open_id=%s"),
+        DOU_ENTERPRISE_VIDEO_COMMENT_TOP_URL(API_DEFAULT_HOST_URL, "/video/comment/top/?open_id=%s"),
+
+        DOU_ENTERPRISE_IM_MESSAGE_SEND_URL(API_DEFAULT_HOST_URL, "/enterprise/im/message/send/?open_id=%s"),
+        DOU_ENTERPRISE_IM_CARD_SAVE_URL(API_DEFAULT_HOST_URL, "/enterprise/im/card/save/?open_id=%s"),
+        DOU_ENTERPRISE_IM_CARD_LIST_URL(API_DEFAULT_HOST_URL, "/enterprise/im/card/list/?open_id=%s&cursor=%s&count=%s"),
+        DOU_ENTERPRISE_IM_CARD_DELETE_URL(API_DEFAULT_HOST_URL, "/enterprise/im/card/delete/?open_id=%s"),
+
+        ;
+        private final String prefix;
+        private final String path;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    enum GoodLife implements ByteOpenApiUrl {
+
+        DOU_GOOD_LIFE_SHOP_POI_URL(API_DEFAULT_HOST_URL, "/goodlife/v1/shop/poi/query/?page=%s&size=%s"),
+        DOU_GOOD_LIFE_NAMEK_FULFILMENT_PREPARE_URL(API_DEFAULT_HOST_URL, "/namek/fulfilment/prepare/?encrypted_data=%s&code=%s"),
+        DOU_GOOD_LIFE_FULFILMENT_CERTIFICATE_VERIFY_URL(API_DEFAULT_HOST_URL, "/goodlife/v1/fulfilment/certificate/verify/?verify_token=%s&poi_id=%s&encrypted_codes=%s&codes=%s&order_id=%s&code_with_time_list=%s"),
+        DOU_GOOD_LIFE_FULFILMENT_CERTIFICATE_CANCEL_URL(API_DEFAULT_HOST_URL, "/goodlife/v1/fulfilment/certificate/cancel/?encrypted_code=%s"),
+        DOU_GOOD_LIFE_FULFILMENT_CERTIFICATE_GET_URL(API_DEFAULT_HOST_URL, "/goodlife/v1/fulfilment/certificate/get/?encrypted_code=%s&codes=%s&order_id=%s"),
+        DOU_GOOD_LIFE_FULFILMENT_CERTIFICATE_VERIFY_RECORD_URL(API_DEFAULT_HOST_URL, "/goodlife/v1/fulfilment/certificate/verify_record/query/?size=%s&cursor=%s&account_id=%s&poi_ids=%s&start_time=%s&end_time=%s"),
+        DOU_GOOD_LIFE_SETTLE_LEDGER_QUERY_RECORD_BY_CERT_URL(API_DEFAULT_HOST_URL, "/goodlife/v1/settle/ledger/query_record_by_cert/?certificate_ids=%s"),
+
+        DOU_POI_SUPPLIER_SYNC_URL(API_DEFAULT_HOST_URL, "/poi/supplier/sync/?contact_phone=%s&contact_tel=%s&images=%s&merchant_uid=%s&service_provider=%s&supplier_ext_id=%s&tags=%s&latitude=%s&status=%s&type_code=%s&type_name=%s&address=%s&avg_cost=%s&customer_info=%s&description=%s&name=%s&recommends=%s&services=%s&attributes=%s&longitude=%s&open_time=%s&poi_id=%s&type=%s"),
+        DOU_POI_SUPPLIER_QUERY_URL(API_DEFAULT_HOST_URL, "/poi/supplier/query/?supplier_ext_id=%s"),
+        DOU_POI_QUERY_URL(API_DEFAULT_HOST_URL, "/poi/query/?amap_id=%s"),
+        DOU_POI_V2_SUPPLIER_QUERY_TASK_URL(API_DEFAULT_HOST_URL, "/poi/v2/supplier/query/task/?supplier_task_ids=%s"),
+        DOU_POI_V2_SUPPLIER_QUERY_SUPPLIER_URL(API_DEFAULT_HOST_URL, "/poi/v2/supplier/query/supplier/?supplier_ext_id=%s"),
+        DOU_POI_V2_SUPPLIER_MATCH_URL(API_DEFAULT_HOST_URL, "/poi/v2/supplier/match/"),
+        DOU_POI_V2_SUPPLIER_QUERY_ALL_URL(API_DEFAULT_HOST_URL, "/poi/supplier/query_all/"),
+        DOU_POI_SUPPLIER_QUERY_CALLBACK_URL(API_DEFAULT_HOST_URL, "/poi/supplier/query_callback/?task_id=%s"),
+
+
+        DOU_POI_SKU_SYNC_URL(API_DEFAULT_HOST_URL, "/poi/sku/sync/"),
+        DOU_POI_SKU_EXT_HOTEL_SKU_URL(API_DEFAULT_HOST_URL, "/poi/ext/hotel/sku/?spu_ext_id=%s&start_date=%s&end_date=%s"),
+        DOU_POI_V2_SPU_SYNC_URL(API_DEFAULT_HOST_URL, "/poi/v2/spu/sync/"),
+        DOU_POI_V2_SPU_STATUS_SYNC_URL(API_DEFAULT_HOST_URL, " /poi/v2/spu/status_sync/"),
+        DOU_POI_V2_SPU_STOCK_UPDATE_URL(API_DEFAULT_HOST_URL, "/poi/v2/spu/stock_update/"),
+        DOU_POI_V2_SPU_GET_URL(API_DEFAULT_HOST_URL, "/poi/v2/spu/get/?spu_ext_id=%s&need_spu_draft=%s&spu_draft_count=%s&supplier_ids_for_filter_reason=%s"),
+        DOU_POI_V2_SPU_TAKE_RATE_SYNC_URL(API_DEFAULT_HOST_URL, "/poi/v2/spu/take_rate/sync/"),
+
 
         ;
         private final String prefix;
