@@ -225,6 +225,17 @@ public interface ByteOpenApiUrl {
 
     @AllArgsConstructor
     @Getter
+    enum Event implements ByteOpenApiUrl {
+
+        DOU_EVENT_STATUS_LIST_URL(API_DEFAULT_HOST_URL, "/event/status/list/?access_token=%s"),
+        DOU_EVENT_STATUS_UPDATE_URL(API_DEFAULT_HOST_URL, "/event/status/update/?access_token=%s"),
+        ;
+        private final String prefix;
+        private final String path;
+    }
+
+    @AllArgsConstructor
+    @Getter
     enum EnterpriseLeads implements ByteOpenApiUrl {
 
         DOU_ENTERPRISE_LEADS_USER_LIST_URL(API_DEFAULT_HOST_URL, "/enterprise/leads/user/list/?open_id=%s&cursor=%s&count=%s&start_time=%s&end_time=%s&leads_level=%s&action_type=%s"),

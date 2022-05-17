@@ -1,6 +1,6 @@
 package com.walnut.cloud.bytedance.open.api;
 
-
+import com.walnut.cloud.bytedance.open.bean.ByteOpenCallback;
 import com.walnut.cloud.bytedance.open.bean.auth.ByteOpenAuthorizerInfo;
 import com.walnut.cloud.bytedance.open.bean.data.billboard.*;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
@@ -350,6 +350,9 @@ public interface ByteOpenOauthService {
      * @throws ByteErrorException 异常
      */
     String getMpItemClickDistribution(String openId, String mpId, int dateType) throws ByteErrorException;
+
+
+    ByteOpenCallback getEventMessage(String body, String signature) throws ByteErrorException;
 
     String post(String uri, List<BasicNameValuePair> parameters) throws UnsupportedEncodingException;
 
