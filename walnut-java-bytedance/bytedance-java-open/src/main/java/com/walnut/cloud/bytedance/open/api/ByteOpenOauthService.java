@@ -8,6 +8,7 @@ import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
 import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFansCheck;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.open.common.error.bytedance.ByteErrorException;
 import org.apache.http.message.BasicNameValuePair;
@@ -108,7 +109,7 @@ public interface ByteOpenOauthService {
      * @return 关注信息
      * @throws ByteErrorException 异常
      */
-    String fansCheck(String followerOpenId, String openId) throws ByteErrorException;
+    ByteOpenFansCheck fansCheck(String followerOpenId, String openId) throws ByteErrorException;
 
     /**
      * <h3> 用户管理 - 解密手机号码 </h3>

@@ -17,6 +17,7 @@ import com.walnut.cloud.bytedance.open.bean.result.ByteOpenRankVersionResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenUserItemResult;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFansCheck;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,11 +34,14 @@ public class ByteOpenGsonBuilder {
         INSTANCE.disableHtmlEscaping();
         INSTANCE.registerTypeAdapter(ByteOpenAccessToken.class, new ByteOpenAccessTokenGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenRefreshToken.class, new ByteOpenRefreshTokenGsonAdapter());
+        INSTANCE.registerTypeAdapter(ByteOpenClientToken.class, new ByteOpenClientTokenGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenAuthorizationInfo.class, new ByteOpenAuthorizationInfoGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenAuthorizerInfo.class, new ByteOpenAuthorizerInfoGsonAdapter());
+
         INSTANCE.registerTypeAdapter(ByteOpenFans.class, new ByteOpenFansAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenFollow.class, new ByteOpenFollowGsonAdapter());
-        INSTANCE.registerTypeAdapter(ByteOpenClientToken.class, new ByteOpenClientTokenGsonAdapter());
+        INSTANCE.registerTypeAdapter(ByteOpenFansCheck.class, new ByteOpenFansCheckGsonAdapter());
+
         INSTANCE.registerTypeAdapter(ByteOpenUserVideoList.class, new ByteOpenUserVideoListGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenUserItemData.class, new ByteOpenUserVideoDataGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenUserItemResult.class, new ByteOpenUserItemResultGsonAdapter());
