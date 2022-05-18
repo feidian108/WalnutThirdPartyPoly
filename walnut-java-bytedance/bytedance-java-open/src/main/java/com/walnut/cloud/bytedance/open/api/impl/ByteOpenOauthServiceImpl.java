@@ -50,8 +50,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.*;
-import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FANS_LIST_URL;
-import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.DOU_GET_FOLLOW_LIST_URL;
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.*;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.Video.DOU_VIDEO_LIST_URL;
 
 
@@ -128,7 +127,7 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         List<BasicNameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("access_token", getByteOpenConfigStorage().getAccessToken(openId)));
         parameters.add(new BasicNameValuePair("open_id", openId));
-        String responseContent =  post("https://open.douyin.com/oauth/userinfo", parameters);
+        String responseContent =  post(GET_OAUTH_USER_INFO_URL.getUrl(getByteOpenConfigStorage()), parameters);
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenAuthorizerInfo.class);
 
     }

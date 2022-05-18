@@ -5,12 +5,12 @@
     <parent>
         <artifactId>WalnutThirdPartyPoly</artifactId>
         <groupId>com.walnut-cloud.open</groupId>
-        <version>1.2.15</version>
+        <version>1.2.16</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>walnut-java-common</artifactId>
-    <version>1.2.15</version>
+    <version>1.2.16</version>
     <name>工具包 - 公共服务模块</name>
 
     <properties>

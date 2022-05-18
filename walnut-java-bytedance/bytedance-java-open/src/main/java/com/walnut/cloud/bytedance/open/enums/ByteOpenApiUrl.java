@@ -56,6 +56,8 @@ public interface ByteOpenApiUrl {
 
         DOU_GET_FANS_LIST_URL( API_DEFAULT_HOST_URL, "/fans/list/?open_id=%s&cursor=%s&count=%s" ),
         DOU_GET_FOLLOW_LIST_URL( API_DEFAULT_HOST_URL, "/following/list/?open_id=%s&cursor=%s&count=%s" ),
+
+        GET_OAUTH_USER_INFO_URL(API_DEFAULT_HOST_URL, "/oauth/userinfo"),
         ;
 
         private final String prefix;
