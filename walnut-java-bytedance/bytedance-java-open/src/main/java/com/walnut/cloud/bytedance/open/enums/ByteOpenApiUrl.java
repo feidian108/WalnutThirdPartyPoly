@@ -277,6 +277,33 @@ public interface ByteOpenApiUrl {
         DOU_POI_V2_SPU_GET_URL(API_DEFAULT_HOST_URL, "/poi/v2/spu/get/?spu_ext_id=%s&need_spu_draft=%s&spu_draft_count=%s&supplier_ids_for_filter_reason=%s"),
         DOU_POI_V2_SPU_TAKE_RATE_SYNC_URL(API_DEFAULT_HOST_URL, "/poi/v2/spu/take_rate/sync/"),
 
+        DOU_POI_ORDER_STATUS_URL(API_DEFAULT_HOST_URL, "/poi/order/status/"),
+        DOU_POI_EXT_HOTEL_ORDER_COMMIT_URL(API_DEFAULT_HOST_URL, "/poi/ext/hotel/order/commit/"),
+        DOU_POI_EXT_HOTEL_ORDER_STATUS_URL(API_DEFAULT_HOST_URL, "/poi/ext/hotel/order/status/"),
+        DOU_POI_EXT_HOTEL_ORDER_CANCEL_URL(API_DEFAULT_HOST_URL, "/poi/ext/hotel/order/cancel/"),
+        DOU_POI_ORDER_CONFIRM_URL(API_DEFAULT_HOST_URL, "/poi/order/confirm/"),
+        DOU_POI_ORDER_CONFIRM_PREPARE_URL(API_DEFAULT_HOST_URL, "/poi/order/confirm/prepare/"),
+        DOU_POI_ORDER_CONFIRM_CANCEL_PREPARE_URL(API_DEFAULT_HOST_URL, "/poi/order/confirm/cancel_prepare/"),
+        DOU_POI_EXT_PRESALE_GROUPON_ORDER_CREATE_URL(API_DEFAULT_HOST_URL, "/poi/ext/presale_groupon/order/create/"),
+        DOU_POI_EXT_PRESALE_GROUPON_ORDER_COMMIT_URL(API_DEFAULT_HOST_URL, "/poi/ext/presale_groupon/order/commit/"),
+        DOU_POI_EXT_PRESALE_GROUPON_ORDER_CANCEL_URL(API_DEFAULT_HOST_URL, "/poi/ext/presale_groupon/order/cancel/"),
+        DOU_POI_ORDER_BILL_TOKEN_URL(API_DEFAULT_HOST_URL, "/poi/order/bill/token/?bill_date=%s"),
+        DOU_POI_ORDER_LIST_TOKEN_URL(API_DEFAULT_HOST_URL, "/poi/order/list/token/?order_date=%s"),
+
+        DOU_POI_ORDER_SYNC_URL(API_DEFAULT_HOST_URL, "/poi/order/sync/"),
+
+        DOU_DATA_EXTERNAL_POI_BASE_URL(API_DEFAULT_HOST_URL, "/data/external/poi/base/?poi_id=%s&begin_date=%s&end_date=%s"),
+        DOU_DATA_EXTERNAL_POI_USER_URL(API_DEFAULT_HOST_URL, "/data/external/poi/user/?poi_id=%s&date_type=%s"),
+        DOU_DATA_EXTERNAL_POI_SERVICE_BASE_URL(API_DEFAULT_HOST_URL, "/data/external/poi/service_base/?poi_id=%s&service_type=%s&begin_date=%s&end_date=%s"),
+        DOU_DATA_EXTERNAL_POI_SERVICE_USER_URL(API_DEFAULT_HOST_URL, "/data/external/poi/service_user/?poi_id=%s&date_type=%s&service_type=%s"),
+        DOU_DATA_EXTERNAL_POI_BILLBOARD_URL(API_DEFAULT_HOST_URL, "/data/external/poi/billboard/?billboard_type=%s"),
+        DOU_DATA_EXTERNAL_POI_CLAIM_LIST_URL(API_DEFAULT_HOST_URL, "/data/external/poi/claim/list/?open_id=%s&cursor=%s&count=%s"),
+
+        DOU_POI_BASE_QUERY_AMAP_URL(API_DEFAULT_HOST_URL, "/poi/base/query/amap/?amap_id=%s"),
+
+        DOU_POI_V2_COUPON_SYNC_URL(API_DEFAULT_HOST_URL, "/poi/v2/coupon/sync/?access_token=%s"),
+        DOU_POI_V2_COUPON_SYNC_COUPON_AVAILABLE_URL(API_DEFAULT_HOST_URL, "/poi/v2/coupon/sync/coupon_available/?access_token=%s"),
+
 
         ;
         private final String prefix;
