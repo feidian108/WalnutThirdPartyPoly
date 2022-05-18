@@ -6,6 +6,7 @@ import com.walnut.cloud.bytedance.open.bean.data.billboard.*;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoSource;
 import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFansCheck;
@@ -143,7 +144,7 @@ public interface ByteOpenOauthService {
      * @return 视频来源信息
      * @throws ByteErrorException 异常
      */
-    String getDouYinVideoSource(String openId, List<String> itemsIds) throws ByteErrorException;
+    ByteOpenUserVideoSource getDouYinVideoSource(String openId, List<String> itemsIds) throws ByteErrorException;
 
     /**
      * <h3> 视频管理 - 抖音 - 查询视频 - 查询视频携带的地点信息 </h3>
