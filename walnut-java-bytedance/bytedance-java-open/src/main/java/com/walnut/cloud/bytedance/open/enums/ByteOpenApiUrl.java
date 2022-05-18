@@ -81,6 +81,7 @@ public interface ByteOpenApiUrl {
         DOU_VIDEO_DELETE_URL(API_DEFAULT_HOST_URL, "/video/delete/?open_id=%s"),
         DOU_VIDEO_LIST_URL(API_DEFAULT_HOST_URL, "/video/list/?open_id=%s&cursor=%s&count=%s"),
         DOU_VIDEO_DATA_URL( API_DEFAULT_HOST_URL, "/video/data/?open_id=%s" ),
+        DOU_VIDEO_SOURCE_URL(API_DEFAULT_HOST_URL, "/video/source/?open_id=%s"),
 
         TOU_VIDEO_UPLOAD_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/upload/?open_id=%s"),
         TOU_VIDEO_CREATE_URL(TOU_DEFAULT_HOST_URL, "/toutiao/video/create/?open_id=%s"),

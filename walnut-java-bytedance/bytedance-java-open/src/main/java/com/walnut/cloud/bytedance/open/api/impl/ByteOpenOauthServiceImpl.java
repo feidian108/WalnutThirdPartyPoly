@@ -13,6 +13,7 @@ import com.walnut.cloud.bytedance.open.bean.data.billboard.*;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoSource;
 import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFansCheck;
@@ -52,7 +53,7 @@ import java.util.concurrent.locks.Lock;
 
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.DataExternal.*;
 import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.User.*;
-import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.Video.DOU_VIDEO_LIST_URL;
+import static com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl.Video.*;
 
 
 @Slf4j
@@ -116,27 +117,6 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         }
         return queryAuth;
 
-    }
-
-
-    /**
-     * <h3> 用户管理 - 解密手机号码 </h3>
-     * @param encryptedMobile 加密的手机号码
-     * @return 解密后的手机号码
-     */
-    @Override
-    public String decryptMobile(String encryptedMobile) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
-        ByteOpenConfigStorage config = getByteOpenConfigStorage();
-        String clientSecret = config.getClientSecret();
-        byte[] clientSecretBytes = clientSecret.getBytes();
-        SecretKey secretKey = new SecretKeySpec(clientSecretBytes, 0, clientSecretBytes.length, "AES");
-
-        byte[] iv = Arrays.copyOfRange(clientSecretBytes, 0, 16);
-        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
-
-        String algorithm = "AES/CBC/PKCS5Padding";
-
-        return DecryptMobileUtil.decrypt(algorithm, encryptedMobile, secretKey, ivParameterSpec);
     }
 
     /**
@@ -218,8 +198,6 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
 
     }
 
-
-
     /**
      * <h3> 刷新 RefreshToken </h3>
      * @param oldRefreshToken 旧的RefreshToken
@@ -273,7 +251,6 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         }
     }
 
-
     /**
      * <h3> 用户管理 - 获取授权方帐号基本信息 </h3>
      * @param openId 用户ID
@@ -288,7 +265,6 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenAuthorizerInfo.class);
 
     }
-
 
     /**
      * <h3> 获取粉丝列表信息 </h3>
@@ -335,6 +311,25 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenFansCheck.class);
     }
 
+    /**
+     * <h3> 用户管理 - 解密手机号码 </h3>
+     * @param encryptedMobile 加密的手机号码
+     * @return 解密后的手机号码
+     */
+    @Override
+    public String decryptMobile(String encryptedMobile) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        ByteOpenConfigStorage config = getByteOpenConfigStorage();
+        String clientSecret = config.getClientSecret();
+        byte[] clientSecretBytes = clientSecret.getBytes();
+        SecretKey secretKey = new SecretKeySpec(clientSecretBytes, 0, clientSecretBytes.length, "AES");
+
+        byte[] iv = Arrays.copyOfRange(clientSecretBytes, 0, 16);
+        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
+
+        String algorithm = "AES/CBC/PKCS5Padding";
+
+        return DecryptMobileUtil.decrypt(algorithm, encryptedMobile, secretKey, ivParameterSpec);
+    }
 
     /**
      * <h3> 视频管理 - 抖音 - 查询视频 - 查询授权账号视频列表 </h3>
@@ -362,7 +357,7 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
     public ByteOpenUserVideoData getDouYinVideoData(String openId, List<String> itemsIds) throws ByteErrorException {
         JSONObject json = new JSONObject();
         json.put("item_ids", itemsIds.toArray());
-        String currentUrl = String.format(DOU_VIDEO_LIST_URL.getUrl(getByteOpenConfigStorage()),
+        String currentUrl = String.format(DOU_VIDEO_DATA_URL.getUrl(getByteOpenConfigStorage()),
                 openId);
         String responseContent = post(currentUrl, openId, json.toString());
         return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenUserVideoData.class);
@@ -376,10 +371,12 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
      * @throws ByteErrorException 异常
      */
     @Override
-    public String getDouYinVideoSource(String openId, List<String> itemsIds) throws ByteErrorException {
+    public ByteOpenUserVideoSource getDouYinVideoSource(String openId, List<String> itemsIds) throws ByteErrorException {
         JSONObject json = new JSONObject();
         json.put("item_ids", itemsIds.toArray());
-        return post("https://open.douyin.com/video/source/?open_id=" + openId, openId, json.toString());
+        String responseContent = post(String.format(DOU_VIDEO_SOURCE_URL.getUrl(getByteOpenConfigStorage()),
+                openId), openId, json.toString());
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenUserVideoSource.class);
     }
 
     /**

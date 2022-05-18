@@ -12,6 +12,7 @@ import com.walnut.cloud.bytedance.open.bean.data.billboard.*;
 import com.walnut.cloud.bytedance.open.bean.data.star.ByteOpenStarAuthorScore;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserItemData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
+import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoSource;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenHotVideoBillboardResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenRankVersionResult;
 import com.walnut.cloud.bytedance.open.bean.result.ByteOpenStarHotListResult;
@@ -43,6 +44,7 @@ public class ByteOpenGsonBuilder {
         INSTANCE.registerTypeAdapter(ByteOpenFansCheck.class, new ByteOpenFansCheckGsonAdapter());
 
         INSTANCE.registerTypeAdapter(ByteOpenUserVideoList.class, new ByteOpenUserVideoListGsonAdapter());
+        INSTANCE.registerTypeAdapter(ByteOpenUserVideoSource.class, new ByteOpenUserVideoSourceGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenUserItemData.class, new ByteOpenUserVideoDataGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenUserItemResult.class, new ByteOpenUserItemResultGsonAdapter());
         INSTANCE.registerTypeAdapter(ByteOpenStarHotListResult.class, new ByteOpenStarHotListGsonAdapter());
