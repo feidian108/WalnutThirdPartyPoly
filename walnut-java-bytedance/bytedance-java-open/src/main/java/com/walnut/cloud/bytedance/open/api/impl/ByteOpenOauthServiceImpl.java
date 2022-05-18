@@ -15,6 +15,7 @@ import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoData;
 import com.walnut.cloud.bytedance.open.bean.item.ByteOpenUserVideoList;
 import com.walnut.cloud.bytedance.open.bean.result.*;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFans;
+import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFansCheck;
 import com.walnut.cloud.bytedance.open.bean.user.ByteOpenFollow;
 import com.walnut.cloud.bytedance.open.enums.ByteOpenApiUrl;
 import com.walnut.cloud.bytedance.open.util.decrypt.DecryptMobileUtil;
@@ -117,32 +118,6 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
 
     }
 
-    /**
-     * <h3> 用户管理 - 获取授权方帐号基本信息 </h3>
-     * @param openId 用户ID
-     * @return 帐号基本信息
-     */
-    @Override
-    public ByteOpenAuthorizerInfo getAuthorizerInfo(String openId) {
-        List<BasicNameValuePair> parameters = new ArrayList<>();
-        parameters.add(new BasicNameValuePair("access_token", getByteOpenConfigStorage().getAccessToken(openId)));
-        parameters.add(new BasicNameValuePair("open_id", openId));
-        String responseContent =  post(GET_OAUTH_USER_INFO_URL.getUrl(getByteOpenConfigStorage()), parameters);
-        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenAuthorizerInfo.class);
-
-    }
-
-    /**
-     * <h3> 用户管理 - 粉丝判断 </h3>
-     * @param followerOpenId 需要检查的用户ID
-     * @param openId 通过/oauth/access_token/获取，用户唯一标志
-     * @return 粉丝判断
-     * @throws ByteErrorException 异常
-     */
-    @Override
-    public String fansCheck(String followerOpenId, String openId) throws ByteErrorException {
-        return get("https://open.douyin.com/fans/check/?follower_open_id=" + followerOpenId + "&open_id=" + openId, openId);
-    }
 
     /**
      * <h3> 用户管理 - 解密手机号码 </h3>
@@ -299,6 +274,21 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
     }
 
 
+    /**
+     * <h3> 用户管理 - 获取授权方帐号基本信息 </h3>
+     * @param openId 用户ID
+     * @return 帐号基本信息
+     */
+    @Override
+    public ByteOpenAuthorizerInfo getAuthorizerInfo(String openId) {
+        List<BasicNameValuePair> parameters = new ArrayList<>();
+        parameters.add(new BasicNameValuePair("access_token", getByteOpenConfigStorage().getAccessToken(openId)));
+        parameters.add(new BasicNameValuePair("open_id", openId));
+        String responseContent =  post(GET_OAUTH_USER_INFO_URL.getUrl(getByteOpenConfigStorage()), parameters);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenAuthorizerInfo.class);
+
+    }
+
 
     /**
      * <h3> 获取粉丝列表信息 </h3>
@@ -331,6 +321,20 @@ public class ByteOpenOauthServiceImpl implements ByteOpenOauthService {
         String responseContent = get(currentUrl, openId);
         return  ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenFollow.class);
     }
+
+    /**
+     * <h3> 用户管理 - 粉丝判断 </h3>
+     * @param followerOpenId 需要检查的用户ID
+     * @param openId 通过/oauth/access_token/获取，用户唯一标志
+     * @return 粉丝判断
+     * @throws ByteErrorException 异常
+     */
+    @Override
+    public ByteOpenFansCheck fansCheck(String followerOpenId, String openId) throws ByteErrorException {
+        String responseContent = get(String.format(DOU_FANS_CHECK_URL.getUrl(getByteOpenConfigStorage()), followerOpenId, openId), openId);
+        return ByteOpenGsonBuilder.create().fromJson(responseContent, ByteOpenFansCheck.class);
+    }
+
 
     /**
      * <h3> 视频管理 - 抖音 - 查询视频 - 查询授权账号视频列表 </h3>
