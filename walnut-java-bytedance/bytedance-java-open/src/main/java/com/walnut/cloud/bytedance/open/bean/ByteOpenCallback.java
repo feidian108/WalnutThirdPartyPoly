@@ -20,6 +20,8 @@ public class ByteOpenCallback implements Serializable {
 
     private String clientKey;
 
+    private String toUserId;
+
     private String fromUserId;
 
     private ByteOpenEventContent content;

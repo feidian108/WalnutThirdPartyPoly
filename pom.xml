@@ -7,7 +7,7 @@
     <groupId>com.walnut-cloud.open</groupId>
     <artifactId>WalnutThirdPartyPoly</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.18</version>
+    <version>1.2.20</version>
 
     <name>第三方开放平台聚合发开工具包</name>
     <description>第三方的平台、开放平台聚合开发工具包</description>
@@ -16,7 +16,6 @@
     <modules>
         <module>walnut-java-common</module>
         <module>walnut-java-bytedance</module>
-        <module>walnut-demo</module>
     </modules>
 
     <properties>
