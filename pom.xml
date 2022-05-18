@@ -16,6 +16,7 @@
     <modules>
         <module>walnut-java-common</module>
         <module>walnut-java-bytedance</module>
+        <module>walnut-demo</module>
     </modules>
 
     <properties>

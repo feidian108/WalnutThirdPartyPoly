@@ -22,7 +22,7 @@ public class ByteOpenCallback implements Serializable {
 
     private String fromUserId;
 
-    private String content;
+    private ByteOpenEventContent content;
 
 
     public static ByteOpenCallback fromJson(String json) {
