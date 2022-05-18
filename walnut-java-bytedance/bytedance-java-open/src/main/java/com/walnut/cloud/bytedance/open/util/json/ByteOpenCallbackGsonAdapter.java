@@ -22,6 +22,7 @@ public class ByteOpenCallbackGsonAdapter implements JsonDeserializer<ByteOpenCal
         callback.setEventId(GsonHelper.getString(jsonObject, "event_id"));
         callback.setEvent(GsonHelper.getString(jsonObject, "event"));
         callback.setFromUserId(GsonHelper.getString(jsonObject, "from_user_id"));
+        callback.setToUserId(GsonHelper.getString(jsonObject, "to_user_id"));
 
         ByteOpenEventContent eventContent = new ByteOpenEventContent();
 
